@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;">
+
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>Ubuntu18.04a安装伪分布式Hadoop3.3.1&nbsp;|&nbsp;Nick的博客</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="Ubuntu18.04a安装伪分布式Hadoop3.3.1">
+  
+    <meta name="description" content="安装教程">
+    <meta property="og:description" content="安装教程">
+  
+  
+  <style>
+    .DateTagBar {
+      margin-top: 1.0rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="Navbar">
+  <a href="index.html">
+    <div class="Navbar__Btn">
+      
+        <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+      
+      <span>Home</span>
+    </div>
+  </a>
+  
+    
+  
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="-fe1f32.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📚&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>分类</span>
+        </div>
+      </a>
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="about.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;😀&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>关于我</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+</nav>
+  <header class="Header">
+    
+    <div class="Header__Spacer Header__Spacer--NoCover">
+    </div>
+    
+    <h1 class="Header__Title">Ubuntu18.04a安装伪分布式Hadoop3.3.1</h1>
+    
+      <div class="DateTagBar">
+        
+        
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--purple">
+            <a href="tag/大数据.html">大数据</a>
+          </span>
+        
+      </div>
+    
+  </header>
+  <article id="https://www.notion.so/0e3e1426d793422da5d812888a9c0bbe" class="PageRoot"><h1 id="https://www.notion.so/4725915cfaaa43b590325411ba85e4fc" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/4725915cfaaa43b590325411ba85e4fc"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">Hadoop3.3.1 Pseudo Distributed Mode on Ubuntu 18.04</span></span></h1><div id="https://www.notion.so/13be4b28294744449a0cc0c78a47f502" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">The operating system in this tutorial is Ubuntu18.04.6. The steps to install Ubuntu18.04 is omitted.</span></span></p></div><h2 id="https://www.notion.so/a94f7fac98494b5c9bafd15ddc800a20" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/a94f7fac98494b5c9bafd15ddc800a20"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">1. Create user hadoop</span></span></h2><div id="https://www.notion.so/876e38435aec4f0aba6f349dd5c84287" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">Open the terminal and type in command below to create new user:</span></span></p></div><pre id="https://www.notion.so/b556603f15974f9fb83b36c1e39753de" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>sudo useradd -m hadoop -s /bin/bash
+</span></span></span></code></pre><div id="https://www.notion.so/fa57c010247b42208f9bece198ecc3a2" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">This command creates a log-in user hadoop and uses /bin/bash as shell.</span></span></p></div><div id="https://www.notion.so/1973ab84237e4bb5bfff9d8f47531b37" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">Set up password for user hadoop:</span></span></p></div><pre id="https://www.notion.so/d31f8ec8ee0a4a9194c04e9d3885e275" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>sudo passwd hadoop
+</span></span></span></code></pre><div id="https://www.notion.so/2483fe2274fe4b5a93988ae6f385a59e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">Give sudo permission to user hadoop:</span></span></p></div><pre id="https://www.notion.so/ad795302d0f14bf38cbd05deebf9e4a8" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>sudo adduser hadoop sudo
+</span></span></span></code></pre><div id="https://www.notion.so/13946ea98dc34f22b1788f60d8b0a602" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">Switch Linux login user (via Ubuntu UI) to </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">hadoop</strong></span><span class="SemanticString"> to process steps below.</span></span></p></div><div id="https://www.notion.so/53799621165b4192b06e12ae24535297" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">upgrade apt</span></span></p></div><pre id="https://www.notion.so/569f8853e56e4b808050cafba003f35c" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>sudo apt-get update
+</span></span></span></code></pre><div id="https://www.notion.so/eaeb8202378c48d1931a27d4268beeee" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">install vim</span></span></p></div><pre id="https://www.notion.so/152b1c70a7c741b5804426c1531aa36e" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>sudo apt-get install vim
+</span></span></span></code></pre><div id="https://www.notion.so/225f35e987574ff296a26b073de77312" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">install ssh, set up ssh none-key login</span></span></p></div><pre id="https://www.notion.so/55ecd7991fb3446fa05b0393697244ee" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>sudo apt-get install openssh-server
+</span></span></span></code></pre><div id="https://www.notion.so/1d12e39b82544823a9c7f2384c08e410" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">login localhost</span></span></p></div><pre id="https://www.notion.so/38d672f171164046a5db95c810e152a3" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>ssh localhost
+</span></span></span></code></pre><div id="https://www.notion.so/1a61af5168544f6e828f6938b85ecd48" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">exit localhost</span></span></p></div><pre id="https://www.notion.so/6cadeced4ef34c7a89a887eb24c5650c" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>exit
+</span></span></span></code></pre><div id="https://www.notion.so/8bdb585e77134ad29fb1586024114889" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">authorize the key</span></span></p></div><pre id="https://www.notion.so/9a44fd2131f74eb9b235c03aee09aef6" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>cd ~/.ssh/
+ssh-keygen -t rsa
+cat ./id_rsa.pub &gt;&gt; ./authorized_keys
+</span></span></span></code></pre><h2 id="https://www.notion.so/47595e0d801e4bfeb4cf12770750519a" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/47595e0d801e4bfeb4cf12770750519a"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">2. Install Java</span></span></h2><pre id="https://www.notion.so/fd71487636ef4ec095dc337f041f960c" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>sudo apt-get install openjdk-8-jre openjdk-8-jdk
+</span></span></span></code></pre><div id="https://www.notion.so/d89dacdcd7a846d8b5b4678842691f5e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">change environment variables</span></span></p></div><pre id="https://www.notion.so/bdee9ec9b1f5486c81ffa3c2b524c7aa" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>cd ~
+vim ~/.bashrc
+</span></span></span></code></pre><div id="https://www.notion.so/7ca7227514364578ae1649e4daa31771" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">add details below to it</span></span></p></div><pre id="https://www.notion.so/b8c628cbd22a4184a1bb7fb6a50553be" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+</span></span></span></code></pre><div id="https://www.notion.so/17873804f7c04569897bfb8fcaef6f54" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">save changes, exit vim and refresh .bashrc</span></span></p></div><pre id="https://www.notion.so/5e67c32c4c2447af8596dc6a51770c3f" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>source ~/.bashrc
+</span></span></span></code></pre><div id="https://www.notion.so/928c0809f73946d19e926b59d48f69cf" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">check java installing successfully</span></span></p></div><pre id="https://www.notion.so/1f196447852a4c2195624aa190436665" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>java -version
+</span></span></span></code></pre><div id="https://www.notion.so/c8aa6019939d410cbe8fce1f319de575" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">If details are shown on the screen, the installation is successful.</span></span></p></div><h2 id="https://www.notion.so/1ed52ef56a28407f9002af0f97807851" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/1ed52ef56a28407f9002af0f97807851"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">3. Install Hadoop3.3.1</span></span></h2><div id="https://www.notion.so/da3f4d955b2e4403a2d7d9e750a5e300" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">change directory</span></span></p></div><pre id="https://www.notion.so/b592da3b517347cf9fe561d08fb2f446" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>cd /usr/local
+</span></span></span></code></pre><div id="https://www.notion.so/11d4561e2cc44a7ea2006dac1505dffd" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">download hadoop3.3.1</span></span></p></div><pre id="https://www.notion.so/b8f762bba02846d2b30a69f7f10011d9" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>sudo wget &lt;http://dlcdn.apache.org/hadoop/common/hadoop-3.3.1/hadoop-3.3.1.tar.gz&gt;
+</span></span></span></code></pre><div id="https://www.notion.so/a81b7715d8684f21870978cd7d8205b7" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">unzip and change filename, ownership</span></span></p></div><pre id="https://www.notion.so/96a07ea6c05a455a828c357523ba0f39" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>tar xzf hadoop-3.3.1.tar.gz
+mv hadoop-3.3.1 hadoop
+sudo chown -R hadoop:hadoop ./hadoop
+</span></span></span></code></pre><h2 id="https://www.notion.so/06f85e7cff6f4e3bb1b0a57bc338dd3b" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/06f85e7cff6f4e3bb1b0a57bc338dd3b"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">4. Configure pseudo distributed mode</span></span></h2><pre id="https://www.notion.so/280d0b386a6f49e6a3030c3519d9dcf5" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>cd ~
+vim ~/.bashrc
+</span></span></span></code></pre><div id="https://www.notion.so/962400b2bd604314a713ce2a6a757c61" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">add details below to .bashrc</span></span></p></div><pre id="https://www.notion.so/ba69db9ecf5a48afbc31528e9b326a29" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+export JRE_HOME=${JAVA_HOME}/jre
+export CLASSPATH=.:${JAVA_HOME}/lib:${JRE_HOME}/lib
+export PATH=${JAVA_HOME}/bin:$PATH
+export HADOOP_HOME=/usr/local/hadoop
+export PATH=$PATH:${HADOOP_HOME}/bin
+export PATH=$PATH:${HADOOP_HOME}/sbin
+export HADOOP_MAPRED_HOME=${HADOOP_HOME}
+export HADOOP_COMMON_HOME=${HADOOP_HOME}
+export YARN_HOME=${HADOOP_HOME}
+</span></span></span></code></pre><div id="https://www.notion.so/55eb5db4a61649ffbc06c34095a88832" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">refresh to activate new environment variables</span></span></p></div><pre id="https://www.notion.so/6a6ebbc169b04ffabede93fe497caad9" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>source ~/.bashrc
+</span></span></span></code></pre><div id="https://www.notion.so/a94ca33b621b4d07b50a27b37fe8da19" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">Configure several files in path :/usr/local/hadoop/etc/hadoop/</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/2bc06573674e4d408b30a6ba0cf63831" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><a class="SemanticString__Fragment SemanticString__Fragment--Link" href="http://hadoop-env.sh/">hadoop-env.sh</a></span></span></li></ul><pre id="https://www.notion.so/7356382afcc14a1299dfcee4fafd871b" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>export JAVA_HOME=/usr/lib/jvm/java-8-openjdk-amd64
+</span></span></span></code></pre><ul class="BulletedListWrapper"><li id="https://www.notion.so/2d34bc81a5f94cca830b829eb7b931c7" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">core-site.xml</span></span></li></ul><pre id="https://www.notion.so/fbbb59f3a9484161bc0fc0ffcfc090e9" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>&lt;configuration&gt;
+	&lt;property&gt;
+    	&lt;name&gt;hadoop.tmp.dir&lt;/name&gt;
+    &lt;value&gt;file:/usr/local/hadoop/tmp&lt;/value&gt;
+    	&lt;description&gt;Abase for other temporary directories.&lt;/description&gt;
+	&lt;/property&gt;
+	&lt;property&gt;
+    	&lt;name&gt;fs.defaultFS&lt;/name&gt;
+    	&lt;value&gt;hdfs://localhost:9000&lt;/value&gt;
+	&lt;/property&gt;
+&lt;/configuration&gt;
+</span></span></span></code></pre><ul class="BulletedListWrapper"><li id="https://www.notion.so/6ba28c493ad044ccb2b2be2ca59eb451" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">hdfs-site.xml</span></span></li></ul><pre id="https://www.notion.so/b737fbb0a3c14b7abe30ec81faaf3763" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>&lt;configuration&gt;
+	&lt;property&gt;
+    	&lt;name&gt;dfs.replication&lt;/name&gt;
+    	&lt;value&gt;1&lt;/value&gt;
+	&lt;/property&gt;
+	&lt;property&gt;
+    	&lt;name&gt;dfs.namenode.name.dir&lt;/name&gt;
+    	&lt;value&gt;file:/usr/local/hadoop/tmp/dfs/name&lt;/value&gt;
+	&lt;/property&gt;
+	&lt;property&gt;
+    	&lt;name&gt;dfs.datanode.data.dir&lt;/name&gt;
+    	&lt;value&gt;file:/usr/local/hadoop/tmp/dfs/data&lt;/value&gt;
+	&lt;/property&gt;
+&lt;/configuration&gt;
+</span></span></span></code></pre><ul class="BulletedListWrapper"><li id="https://www.notion.so/9cc6fa683582447387f1d915ba7cf8f8" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">mapred-site.xml</span></span></li></ul><pre id="https://www.notion.so/ec8df74d9f9d4c14a3e51c5919352d95" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>&lt;configuration&gt;
+	&lt;property&gt;
+		&lt;name&gt;mapreduce.framework.name&lt;/name&gt;
+		&lt;value&gt;yarn&lt;/value&gt;
+	&lt;/property&gt;
+	&lt;property&gt;
+		&lt;name&gt;yarn.app.mapreduce.am.env&lt;/name&gt;
+	  &lt;value&gt;HADOOP_MAPRED_HOME=/usr/local/hadoop&lt;/value&gt;
+	&lt;/property&gt;
+	&lt;property&gt;
+	  &lt;name&gt;mapreduce.map.env&lt;/name&gt;
+	  &lt;value&gt;HADOOP_MAPRED_HOME=/usr/local/hadoop&lt;/value&gt;
+	&lt;/property&gt;
+	&lt;property&gt;
+	  &lt;name&gt;mapreduce.reduce.env&lt;/name&gt;
+	  &lt;value&gt;HADOOP_MAPRED_HOME=/usr/local/hadoop&lt;/value&gt;
+	&lt;/property&gt;
+&lt;/configuration&gt;
+</span></span></span></code></pre><ul class="BulletedListWrapper"><li id="https://www.notion.so/bf44f92c3d1b401d8dbeec42167c0644" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">yarn-site.xml</span></span></li></ul><pre id="https://www.notion.so/df290fd54e254e739952e40ae4f320c8" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>&lt;configuration&gt;
+&lt;property&gt;
+	&lt;name&gt;yarn.nodemanager.aux-services&lt;/name&gt;
+	&lt;value&gt;mapreduce_shuffle&lt;/value&gt;
+&lt;/property&gt;
+&lt;property&gt;
+	&lt;name&gt;yarn.nodemanager.aux-services.mapreduce.shuffle.class&lt;/name&gt;
+	&lt;value&gt;org.apache.hadoop.mapred.ShuffleHandler&lt;/value&gt;
+&lt;/property&gt;
+&lt;/configuration&gt;
+</span></span></span></code></pre><div id="https://www.notion.so/ff7641ec36a84752830548804c8699fb" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">format NameNode:</span></span></p></div><pre id="https://www.notion.so/64faabb9a2eb406ea299a2a411a8772a" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>hdfs namenode -format
+</span></span></span></code></pre><div id="https://www.notion.so/4582d5d2ec144c7682d68bb224605874" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">start hdfs</span></span></p></div><pre id="https://www.notion.so/4168e17d172f44448203c3267527fa64" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>start-dfs.sh
+</span></span></span></code></pre><div id="https://www.notion.so/84cedd6f112749a98cb3c8d4d29be491" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">start yarn</span></span></p></div><pre id="https://www.notion.so/851363bde0714281a347a3f1eb15aa64" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>start-yarn.sh
+</span></span></span></code></pre><div id="https://www.notion.so/703045376cce4ab6874057237426eb8f" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">to certify that dfs and yarn started successfully:</span></span></p></div><pre id="https://www.notion.so/e1c26bbc009e47f684cb7c804c10cf43" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>jps
+</span></span></span></code></pre><div id="https://www.notion.so/90cafc7cc24b4543a8639168c3570e97" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">if it looks like below (all parts should show up), previous steps are successful</span></span></p></div><pre id="https://www.notion.so/f4d33951472e4106ae1a252c15f0275e" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>$jps
+2961 ResourceManager
+2482 DataNode
+3077 NodeManager
+2366 NameNode
+2686 SecondaryNameNode
+3199 Jps
+</span></span></span></code></pre><div id="https://www.notion.so/65bc2ff397464e1a8724d6e5766708ac" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">if namenode doesn&#x27;t show up, you need tou format the namenode. Please make sure there is no important files in HDFS, beacause everything will be cleared.</span></span></p></div><pre id="https://www.notion.so/563f5b98e0c04487bf619b678a11690e" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>cd /usr/local/hadoop
+./sbin/stop-dfs.sh   # stop HDFS
+rm -r ./tmp     # note: this will clear all files in HDFS
+./bin/hdfs namenode -format # format namenode
+./sbin/start-dfs.sh  # restart
+</span></span></span></code></pre><h2 id="https://www.notion.so/e22a7da3c97949b8905c1dd0c8b88198" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/e22a7da3c97949b8905c1dd0c8b88198"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">5. Job Test</span></span></h2><div id="https://www.notion.so/fbc5c04912f849fc9228955abe60f22a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">try to run an example-jar file</span></span></p></div><pre id="https://www.notion.so/5947deb5ec35462e8183e54f70f92c9c" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>cd usr/local/hadoop/share/hadoop/mapreduce/
+hadoop jar ./hadoop-mapreduce-examples-3.3.1.jar pi 5 10
+</span></span></span></code></pre><div id="https://www.notion.so/63ec8a30b417429886257a890ad34e6a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">open browser to see web UI pages</span></span></p></div><div id="https://www.notion.so/7c48003429934c1097e6a45f2f1f9c51" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">urls:</span></span></p></div><pre id="https://www.notion.so/bb660abaeb7648a69b40f709fb938b4e" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>localhost:9870
+</span></span></span></code></pre><pre id="https://www.notion.so/dd3268c140b84e6dba381fe1104fc5b1" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>localhost:8088
+</span></span></span></code></pre><div id="https://www.notion.so/4c495b508f504f7fb5bd005de697c0c2" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">You can also access the web page on other PC. First, find the IP address of the ubuntu.</span></span></p></div><pre id="https://www.notion.so/93a7dc8cc3894302a2e883c0a230a823" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>ifconfig -a
+</span></span></span></code></pre><div id="https://www.notion.so/b65bfe08e1ed413b903c814e219dc423" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">The information showed up gives ip address. You can access the web page on other PC&#x27;s browsers.</span></span></p></div><pre id="https://www.notion.so/1bf219d668ab4422ab6281f7cc30be44" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>${IP ADDRESS}:9870
+${IP ADDRESS}:8088
+</span></span></span></code></pre><blockquote id="https://www.notion.so/eaaf79423ff7468b844d4fc2dd2dc9dd" class="ColorfulBlock ColorfulBlock--ColorDefault Quote"><span class="SemanticStringArray"><span class="SemanticString">note: the job history port is 19888</span></span></blockquote><h2 id="https://www.notion.so/425c93f4b381466ab6960cf1b65aaa46" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/425c93f4b381466ab6960cf1b65aaa46"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">6. Shut down</span></span></h2><div id="https://www.notion.so/2183769b0837478b9bfe436d58afaeb8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">use command separately :</span></span></p></div><pre id="https://www.notion.so/ac47c2ecc68143328ee98f0ae9962f12" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>stop-dfs.sh
+stop-yarn.sh
+</span></span></span></code></pre><div id="https://www.notion.so/4fb91beb8bcf42ff9fd4b7e58d81f3e8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">Or stop them together:</span></span></p></div><pre id="https://www.notion.so/36c9f5dfb45d4ba9b8996492a6ed3eab" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>stop-all.sh
+</span></span></span></code></pre></article>
+    <script src="https://utteranc.es/client.js"
+        repo="youthtoday/youthtoday.github.io"
+        issue-term="pathname"
+        label="✨"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  <footer class="Footer">
+  <div>&copy; Nick的博客 2022</div>
+  <div>&centerdot;</div>
+  <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
+      rel="noopener noreferrer">Notablog</a>.
+  </div>
+</footer>
+</body>
+
+</html>
