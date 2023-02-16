@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;">
+
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>MySQL读写分离&nbsp;|&nbsp;Nick的博客</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="MySQL读写分离">
+  
+  
+  <style>
+    .DateTagBar {
+      margin-top: 1.0rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="Navbar">
+  <a href="index.html">
+    <div class="Navbar__Btn">
+      
+        <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+      
+      <span>Home</span>
+    </div>
+  </a>
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="-a35031.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;🌐&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>计算机网络</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="about.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;😀&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>About</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+</nav>
+  <header class="Header">
+    
+    <div class="Header__Spacer Header__Spacer--NoCover">
+    </div>
+    
+    <h1 class="Header__Title">MySQL读写分离</h1>
+    
+      <div class="DateTagBar">
+        
+        
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
+            <a href="tag/MySQL.html">MySQL</a>
+          </span>
+        
+      </div>
+    
+  </header>
+  <article id="https://www.notion.so/6eadabd275204222b0409b11736501a4" class="PageRoot"><h1 id="https://www.notion.so/e4d083e6934f4d2dbad958adce59abfa" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/e4d083e6934f4d2dbad958adce59abfa"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">MySQL主从复制</span></span></h1><div id="https://www.notion.so/fed1275b8f8c4808aa2717698fc5cb17" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MySQL读写分离是基于主从复制的。</span></span></p></div><div id="https://www.notion.so/9c057f8d6eef4a1da5672c8e09a79c88" class="Image Image--Normal"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F23c8acf5-c5ae-425d-9f07-d6655a585167%2FUntitled.png?width=384&amp;table=block&amp;id=9c057f8d-6eef-4a1d-a567-2c8e09a79c88"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F23c8acf5-c5ae-425d-9f07-d6655a585167%2FUntitled.png?width=384&amp;table=block&amp;id=9c057f8d-6eef-4a1d-a567-2c8e09a79c88" style="width:384px"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/fface3e6a4214112a22347f5ea878b42" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">MySQL主从复制</strong></span><span class="SemanticString">是一个异步的复制过程，底层是基于MySQL数据库自带的</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">二进制日志</strong></span><span class="SemanticString">功能。就是一台或多台MySQL数据库（slave，即</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">从库</strong></span><span class="SemanticString">）从另一台MySQL数据库（master，即</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">主库</strong></span><span class="SemanticString">）进行日志的复制，然后再解析日志并应用到自身，最终实现</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">从库</strong></span><span class="SemanticString">的数据和</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">主库</strong></span><span class="SemanticString">的数据保持一致。MySQL主从复制是MySQL数据库自带功能，无需借助第三方工具。</span></span></p></div><div id="https://www.notion.so/cd309ace9ecd4fb582217638d27ec7df" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MySQL复制过程分成三步：</span></span></p></div><ol class="NumberedListWrapper"><li id="https://www.notion.so/c06525e924344894bf56914377a906dd" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString">master将改变记录到二进制日志（binary log）</span></span></li><li id="https://www.notion.so/4811b7703fac49f29695852a5a9c4728" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString">slave将master的binary log拷贝到它的中继日志（relay log）</span></span></li><li id="https://www.notion.so/059f3b6bca794feca187dd0bc842e575" class="NumberedList" value="3"><span class="SemanticStringArray"><span class="SemanticString">slave重做中继日志中的事件，将改变应用到自己的数据库中(read and replay)</span></span></li></ol><div id="https://www.notion.so/304ec9547ba24da28cbd927a3e20ba05" class="Image Image--Normal"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fbd5589fa-f1ae-4fe4-a0b1-97f50e327bc1%2FUntitled.png?width=480&amp;table=block&amp;id=304ec954-7ba2-4da2-8cbd-927a3e20ba05"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fbd5589fa-f1ae-4fe4-a0b1-97f50e327bc1%2FUntitled.png?width=480&amp;table=block&amp;id=304ec954-7ba2-4da2-8cbd-927a3e20ba05" style="width:480px"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h1 id="https://www.notion.so/a37fc63821514908b7c9eb81a569e3d3" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/a37fc63821514908b7c9eb81a569e3d3"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">配置</span></span></h1><div id="https://www.notion.so/a3e2a879755d4882a1291deaf7270bde" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">前置条件：准备两台服务器，分别安装好mysql并启动服务成功。</span></span></p></div><h3 id="https://www.notion.so/e432c85368d84c639018618a03cb4d06" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/e432c85368d84c639018618a03cb4d06"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">配置主库</strong></span></span></h3><div id="https://www.notion.so/c24e3e2682664eedbc1c3aad00b09d85" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">第一步：修改mysql数据库的配置文件</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">/etc/my.cnf</code></span></span></p></div><blockquote id="https://www.notion.so/b89d8dab913c4fd2a2350f71a45d3dc2" class="ColorfulBlock ColorfulBlock--ColorDefault Quote"><span class="SemanticStringArray"><span class="SemanticString">[mysqld]
+log-bin=mysql-bin     #[必须]启用二进制日志
+server-id=100             #[必须]服务器唯一ID</span></span></blockquote><div id="https://www.notion.so/8d10ee20225048a198bc1989c416fc89" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">第二步：重启mysql服务</span></span></p></div><div id="https://www.notion.so/7b7d41874b3d45c09711778a9ffbcd04" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">systemctl restart mysqld</code></span></span></p></div><div id="https://www.notion.so/c7a1329b90a64355bb364f2bb471a24c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">第三步：登录mysql数据库，执行下面sql</span></span></p></div><div id="https://www.notion.so/5cad7eabe6fd4dcfb6b6937867732fa0" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">GRANT REPLICATION SLAVE ON *.* to ‘xiaoming’@’%’ identified by ‘123456’;</code></span></span></p></div><div id="https://www.notion.so/9b0339cce3304502a01c8df3da2b3901" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">上面的sql作用是创建一个用户xiaoming，密码为123456，并且给xiaoming用户授予replication slave权限。通常用于建立复制时所需要用到的用户权限，也就是slave必须被master授权具有该权限的用户才能通过该用户复制。</span></span></p></div><div id="https://www.notion.so/0ab3b8764181498f90b58cd21b70c41d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">第四步：执行sql</span></span></p></div><div id="https://www.notion.so/9caee16cc0e14309b453febfac14793c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">show master status</code></span></span></p></div><div id="https://www.notion.so/b7f1cc0f5c10404ca705ba0e5c8e8766" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">记录下File和Position这两个数据，比如File是mysql-bin.000005，Position是441</span></span></p></div><h3 id="https://www.notion.so/2e2b8ef481f44965b3d8762785b1001c" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/2e2b8ef481f44965b3d8762785b1001c"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">配置从库</strong></span></span></h3><div id="https://www.notion.so/2b2ccf62516a41eab97d9b7807e6e1d6" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">第一步：修改mysql数据库的配置文件</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">/etc/my.cnf</code></span></span></p></div><blockquote id="https://www.notion.so/79ab54157fa14dd8a1843801f50d2336" class="ColorfulBlock ColorfulBlock--ColorDefault Quote"><span class="SemanticStringArray"><span class="SemanticString">[mysqld]
+server-id=101             #[必须]服务器唯一ID</span></span></blockquote><div id="https://www.notion.so/2454691738b14ae3ba5e14f6c3ec4da4" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">第二步：重启mysql服务</span></span></p></div><div id="https://www.notion.so/6d1d272b9a2848cebcf6f897b55309e0" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">systemctl restart mysqld</code></span></span></p></div><div id="https://www.notion.so/a069f0f585f14a0696e3d8bc12ea9822" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">第三步：登录mysql数据库，执行下面sql</span></span></p></div><div id="https://www.notion.so/c7e88bbe73c0465dba04d34e02098e18" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">stop slave;</code></span></span></p></div><div id="https://www.notion.so/5adf9436c4cb485da8be2a047038580b" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">change master to
+master_host=’&lt;your master ip&gt;’, master_user=’xiaoming’, master_password=’123456’, master_log_file=’mysql-bin.000001’, master_log_pos=441;</code></span></span></p></div><div id="https://www.notion.so/05a09b7712714310a7ba64902e24b09c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">start slave;</code></span></span></p></div><div id="https://www.notion.so/9d1b09a51e61422a9ad679f9e70f8c9e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">第四步：执行sql</span></span></p></div><div id="https://www.notion.so/a59aa405f7a7487a99a4c21e7fe1fc51" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">show slave status</code></span></span></p></div><div id="https://www.notion.so/623e2ab51d314009b0f1198dc8179812" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">即可查看主从复制情况</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">Slave_IO_Running</code></span><span class="SemanticString">和</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">Slave_SQL_Running</code></span></span></p></div></article>
+    <script src="https://utteranc.es/client.js"
+        repo="youthtoday/youthtoday.github.io"
+        issue-term="pathname"
+        label="✨"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  <footer class="Footer">
+  <div>&copy; Nick的博客 2022</div>
+  <div>&centerdot;</div>
+  <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
+      rel="noopener noreferrer">Notablog</a>.
+  </div>
+</footer>
+</body>
+
+</html>
