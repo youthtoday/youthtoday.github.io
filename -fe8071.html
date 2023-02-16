@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;">
+
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>应用层常见协议&nbsp;|&nbsp;Nick的博客</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="应用层常见协议">
+  
+  
+  <style>
+    .DateTagBar {
+      margin-top: 1.0rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="Navbar">
+  <a href="index.html">
+    <div class="Navbar__Btn">
+      
+        <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+      
+      <span>Home</span>
+    </div>
+  </a>
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="-a35031.html">
+        <div class="Navbar__Btn">
+          
+          <span>计算机网络</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="about.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;😀&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>About</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+    
+  
+</nav>
+  <header class="Header">
+    
+    <div class="Header__Spacer Header__Spacer--NoCover">
+    </div>
+    
+    <h1 class="Header__Title">应用层常见协议</h1>
+    
+      <div class="DateTagBar">
+        
+        
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--orange">
+            <a href="tag/计算机网络.html">计算机网络</a>
+          </span>
+        
+      </div>
+    
+  </header>
+  <article id="https://www.notion.so/fe80719fe7fa4c5c97d8f94536d6ade2" class="PageRoot"><h2 id="https://www.notion.so/09228206d4f94a4f89961bdb40fb57f6" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/09228206d4f94a4f89961bdb40fb57f6"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">一、HTTP超文本传输协议</span></span></h2><div id="https://www.notion.so/57309cec1025462f96eeb6d6f7f05d0a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">超文本传输协议（HTTP，HyperText Transfer Protocol)</strong></span><span class="SemanticString">主要是为 Web 浏览器与 Web 服务器之间的通信而设计的。当我们使用浏览器浏览网页的时候，我们网页就是通过 HTTP 请求进行加载的，整个过程如下图所示。</span></span></p></div><div id="https://www.notion.so/594365c83d1d418ca88deb463db35b54" class="Image Image--Normal"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F1835cba2-e8f3-4a95-ad06-0781031cf2b6%2FUntitled.png?width=450&amp;table=block&amp;id=594365c8-3d1d-418c-a88d-eb463db35b54"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F1835cba2-e8f3-4a95-ad06-0781031cf2b6%2FUntitled.png?width=450&amp;table=block&amp;id=594365c8-3d1d-418c-a88d-eb463db35b54" style="width:450px"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/c1a70dee5b9b413aaa2df1e58ba95f0a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">HTTP 协是基于 TCP协议，发送 HTTP 请求之前首先要建立 TCP 连接也就是要经历 3 次握手。目前使用的 HTTP 协议大部分都是 1.1。在 1.1 的协议里面，默认是开启了 Keep-Alive 的，这样的话建立的连接就可以在多次请求中被复用了。</span></span></p></div><div id="https://www.notion.so/4d93e9441b174031984b00aca23ae81d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">另外， HTTP 协议是”无状态”的协议，它无法记录客户端用户的状态，一般我们都是通过 Session 来记录客户端用户的状态。</span></span></p></div><h2 id="https://www.notion.so/117ac674e1df4e1fae78e9ce3621f03f" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/117ac674e1df4e1fae78e9ce3621f03f"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">二、SMTP简单邮件传输协议</span></span></h2><div id="https://www.notion.so/47d13f967f774a379f3784fb0cb8da09" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">简单邮件传输(发送)协议（SMTP，Simple Mail Transfer Protocol）</strong></span><span class="SemanticString">基于 TCP 协议，用来发送电子邮件。</span></span></p></div><div id="https://www.notion.so/18c49011db1f4f178af7e1547da4a705" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F1a39053e-7667-487d-b72b-b178f077290d%2FUntitled.png?width=1208&amp;table=block&amp;id=18c49011-db1f-4f17-8af7-e1547da4a705"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F1a39053e-7667-487d-b72b-b178f077290d%2FUntitled.png?width=1208&amp;table=block&amp;id=18c49011-db1f-4f17-8af7-e1547da4a705" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/9ced21a8eb4a4c2aba3615afc0897e79" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">注意⚠️：</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">接受邮件的协议不是 SMTP 而是 POP3 /IMAP(Internet Messaging Access Protocol)协议。</strong></span></span></p></div><div id="https://www.notion.so/707da76c79664e8ea8d39e4c93ec0a38" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">SMTP 协议这块涉及的内容比较多，下面这两个问题比较重要：</span></span></p></div><ol class="NumberedListWrapper"><li id="https://www.notion.so/3b623a8805fa4dd49f3e10e1a8e634c8" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString">电子邮件的发送过程</span></span></li><li id="https://www.notion.so/bdb32a2d866a4918bb76b77142e11677" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString">如何判断邮箱是真正存在的？</span></span></li></ol><div id="https://www.notion.so/b3ab1a7d066542298da7d3eeb336a24a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">电子邮件的发送过程？</strong></span></span></p></div><div id="https://www.notion.so/767c7d6af2e043a092331cdd44158b01" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">比如我的邮箱是“dabai@cszhinan.com”，我要向“xiaoma@qq.com”发送邮件，整个过程可以简单分为下面几步：</span></span></p></div><ol class="NumberedListWrapper"><li id="https://www.notion.so/1aaddc30a04743f79ef77eeac3449ac8" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString">通过 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">SMTP</strong></span><span class="SemanticString"> 协议，我将我写好的邮件交给163邮箱服务器（邮局）。</span></span></li><li id="https://www.notion.so/ecf48f6dfbc946ec93ed5f65e9a363e1" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString">163邮箱服务器发现我发送的邮箱是qq邮箱，然后它使用 SMTP协议将我的邮件转发到 qq邮箱服务器。</span></span></li><li id="https://www.notion.so/0c6b7d63ecb54fb3b5d0a1cc42890aa6" class="NumberedList" value="3"><span class="SemanticStringArray"><span class="SemanticString">qq邮箱服务器接收邮件之后就通知邮箱为“xiaoma@qq.com”的用户来收邮件，然后用户就通过 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">POP3/IMAP</strong></span><span class="SemanticString"> 协议将邮件取出。</span></span></li></ol><div id="https://www.notion.so/03e7b985b65b4a788ab8a6e57c6fbca9" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">如何判断邮箱是真正存在的？</strong></span></span></p></div><div id="https://www.notion.so/7b4ef4796b7f4e83acf44b38b6059b4e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">很多场景(比如邮件营销)下面我们需要判断我们要发送的邮箱地址是否真的存在，这个时候我们可以利用 SMTP 协议来检测：</span></span></p></div><ol class="NumberedListWrapper"><li id="https://www.notion.so/f28e279c992141b0a5ae5d806afe076a" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString">查找邮箱域名对应的 SMTP 服务器地址</span></span></li><li id="https://www.notion.so/03ebbee01d96457a9506997a65c25a48" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString">尝试与服务器建立连接</span></span></li><li id="https://www.notion.so/5934becb094546e3ae13b723fbaeb159" class="NumberedList" value="3"><span class="SemanticStringArray"><span class="SemanticString">连接成功后尝试向需要验证的邮箱发送邮件</span></span></li><li id="https://www.notion.so/0cf282f2e0c842bb823c966108101501" class="NumberedList" value="4"><span class="SemanticStringArray"><span class="SemanticString">根据返回结果判定邮箱地址的真实性</span></span></li></ol><h2 id="https://www.notion.so/a01dbc5e6c5f4f409eff3b1d4379af7a" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/a01dbc5e6c5f4f409eff3b1d4379af7a"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">三、POP3/IMAP:邮件接收的协议</span></span></h2><div id="https://www.notion.so/d58037b12abb479eaf044e42d923149b" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">这两个协议没必要多做阐述，只需要了解 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">POP3 和 IMAP 两者都是负责邮件接收的协议</strong></span><span class="SemanticString">即可。另外，需要注意不要将这两者和 SMTP 协议搞混淆了。</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">SMTP 协议只负责邮件的发送，真正负责接收的协议是POP3/IMAP。</strong></span></span></p></div><div id="https://www.notion.so/58ca0d39f1d5470389b8d34199023452" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">IMAP 协议相比于POP3更新一点，为用户提供的可选功能也更多一点,几乎所有现代电子邮件客户端和服务器都支持IMAP。大部分网络邮件服务提供商都支持POP3和IMAP。</span></span></p></div><h2 id="https://www.notion.so/969925d50be74242a4d114ea214b3f02" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/969925d50be74242a4d114ea214b3f02"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">四、FTP：文件传输协议</span></span></h2><div id="https://www.notion.so/2d1e99f34534470386b65553369fbc9f" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">FTP 协议</strong></span><span class="SemanticString"> 主要提供文件传输服务，基于 TCP 实现可靠的传输。使用 FTP 传输文件的好处是可以屏蔽操作系统和文件存储方式。</span></span></p></div><div id="https://www.notion.so/e4768d47ae254a46be818c866574a994" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">FTP 是基于客户—服务器（C/S）模型而设计的，在客户端与 FTP 服务器之间建立两个连接。</span></span></p></div><div id="https://www.notion.so/ad2e11272f004239891103de9afbb1f9" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">FTP 的独特的优势同时也是与其它客户服务器程序最大的不同点就在于它在两台通信的主机之间使用了两条 TCP 连接（其它客户服务器应用程序一般只有一条 TCP 连接）：</span></span></p></div><ol class="NumberedListWrapper"><li id="https://www.notion.so/de3eaf32f0c74b609f902f3aad95d90f" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString">控制连接：用于传送控制信息（命令和响应）;</span></span></li><li id="https://www.notion.so/a07ab3644a534ec2a17d7483ac2b998d" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString">数据连接：用于数据传送。</span></span></li></ol><div id="https://www.notion.so/7c5385d7d5724d9eb0d9b9a48748fc80" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">这种将命令和数据分开传送的思想大大提高了 FTP 的效率。</span></span></p></div><div id="https://www.notion.so/8ef0ce0e29824de9b6e25659e3bb8554" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F4e837615-b4c4-4114-83ce-0db6e3e22e13%2FUntitled.png?width=1024&amp;table=block&amp;id=8ef0ce0e-2982-4de9-b6e2-5659e3bb8554"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F4e837615-b4c4-4114-83ce-0db6e3e22e13%2FUntitled.png?width=1024&amp;table=block&amp;id=8ef0ce0e-2982-4de9-b6e2-5659e3bb8554" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h2 id="https://www.notion.so/7816125365cc477f8e8bb10d95abc43c" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/7816125365cc477f8e8bb10d95abc43c"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">四、Telnet:远程登陆协议</span></span></h2><div id="https://www.notion.so/9615da5bfe0a4f5f82f25bc2a8fa300b" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Telnet 协议</strong></span><span class="SemanticString"> 通过一个终端登陆到其他服务器，建立在可靠的传输协议 TCP 之上。Telnet 协议的最大缺点之一是</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">所有数据（包括用户名和密码）均以明文形式发送</strong></span><span class="SemanticString">，这有潜在的安全风险。这就是为什么如今很少使用Telnet并被一种称为SSH的非常安全的协议所取代的主要原因。</span></span></p></div><h2 id="https://www.notion.so/c1742db41f334bc980d74553dd7ee7d0" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/c1742db41f334bc980d74553dd7ee7d0"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">五、SSH:安全的网络传输协议</span></span></h2><div id="https://www.notion.so/bbb50836442c4f918dd48a42ab766932" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">SSH（ Secure Shell）</strong></span><span class="SemanticString"> 是目前较可靠，专为远程登录会话和其他网络服务提供安全性的协议。利用 SSH 协议可以有效防止远程管理过程中的信息泄露问题。SSH 建立在可靠的传输协议 TCP 之上。</span></span></p></div><div id="https://www.notion.so/c2033ee4ba8b418cb0d2b29cb9f85b4c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Telnet 和 SSH 之间的主要区别在于 SSH 协议会对传输的数据进行加密保证数据安全性。</strong></span></span></p></div></article>
+  <footer class="Footer">
+  <div>&copy; Nick的博客 2022</div>
+  <div>&centerdot;</div>
+  <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
+      rel="noopener noreferrer">Notablog</a>.
+  </div>
+</footer>
+</body>
+
+</html>
