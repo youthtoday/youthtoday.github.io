@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;">
+
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>网络体系结构&nbsp;|&nbsp;Nick的博客</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="网络体系结构">
+  
+  
+  <style>
+    .DateTagBar {
+      margin-top: 1.0rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="Navbar">
+  <a href="index.html">
+    <div class="Navbar__Btn">
+      
+        <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+      
+      <span>Home</span>
+    </div>
+  </a>
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="-a35031.html">
+        <div class="Navbar__Btn">
+          
+          <span>计算机网络</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="about.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;😀&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>About</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+</nav>
+  <header class="Header">
+    
+    <div class="Header__Spacer Header__Spacer--NoCover">
+    </div>
+    
+    <h1 class="Header__Title">网络体系结构</h1>
+    
+      <div class="DateTagBar">
+        
+        
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--orange">
+            <a href="tag/计算机网络.html">计算机网络</a>
+          </span>
+        
+      </div>
+    
+  </header>
+  <article id="https://www.notion.so/c786cf22528c40868beb7a37e68d13f6" class="PageRoot"><h2 id="https://www.notion.so/79524ba4b69043e1b4f0aca63f547a5d" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/79524ba4b69043e1b4f0aca63f547a5d"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">一、OSI七层模型</span></span></h2><div id="https://www.notion.so/318e64a227ad4a5bac65eea9128f9b13" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">OSI 七层模型是国际标准化组织提出一个网络分层模型，其大体结构以及每一层提供的功能如下</span></span></p></div><div id="https://www.notion.so/f17308e34858460a8f2fc167ba3809cd" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6b89156f-36af-4f92-bdb5-e92e616487a6%2FUntitled.png?width=1852&amp;table=block&amp;id=f17308e3-4858-460a-8f2f-c167ba3809cd"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6b89156f-36af-4f92-bdb5-e92e616487a6%2FUntitled.png?width=1852&amp;table=block&amp;id=f17308e3-4858-460a-8f2f-c167ba3809cd" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/d03754ff5fbf4faca46e5545dfc24c61" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">每一层都专注做一件事情，并且每一层都使用下层提供的服务并向上层提供服务。比如传输层需要使用网络层提供的路由和寻址功能，这样传输层才知道把数据传输到哪里去。</span></span></p></div><h3 id="https://www.notion.so/a189eb65bcbb465e8fc4d36106188bdd" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/a189eb65bcbb465e8fc4d36106188bdd"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">为什么OSI七层体系结构不常用</span></span></h3><ul class="BulletedListWrapper"><li id="https://www.notion.so/c4bc5360c0c14a85b6feb7b239a491c8" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">OSI 的专家缺乏实际经验，他们在完成 OSI 标准时缺乏商业驱动力</span></span></li><li id="https://www.notion.so/4f17277a682d4d3c801f2b4f6b447b8c" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">OSI 的协议实现起来过分复杂，而且运行效率很低</span></span></li><li id="https://www.notion.so/1dac7139caae4deeb34c2f97f8426176" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">OSI 制定标准的周期太长，因而使得按 OSI 标准生产的设备无法及时进入市场（20 世纪 90 年代初期，虽然整套的 OSI 国际标准都已经制定出来，但基于 TCP/IP 的互联网已经抢先在全球相当大的范围成功运行了）</span></span></li><li id="https://www.notion.so/976f228cb3144965b213747760149a01" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">OSI 的层次划分不太合理，有些功能在多个层次中重复出现</span></span></li></ul><h2 id="https://www.notion.so/97fc79b3d34d4fa790e5e8f28bd9f762" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/97fc79b3d34d4fa790e5e8f28bd9f762"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">二、TCP/IP四层模型</span></span></h2><div id="https://www.notion.so/1d1ea6a3a4b44126aed1660cdbb4e643" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">我们可以将 TCP / IP 模型看作是 OSI 七层模型的精简版本，由以下 4 层组成：</span></span></p></div><h3 id="https://www.notion.so/bbdd53c2fc304bc0a79def2c341fba2f" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/bbdd53c2fc304bc0a79def2c341fba2f"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">2.1 应用层</span></span></h3><div id="https://www.notion.so/d89cc6a1610d4e9abc6a6ab5883654d1" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">应用层主要提供两个终端设备上的</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">应用程序</strong></span><span class="SemanticString">之间</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">信息交换</strong></span><span class="SemanticString">的服务，它定义了信息交换的格式，消息会交给下一层传输层来传输。我们把应用层交互的数据单元称为</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">报文</strong></span><span class="SemanticString">message。</span></span></p></div><div id="https://www.notion.so/da3a6d2663314ee681eada3d59536743" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">应用层协议定义了网络通信规则，对于不同的</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">网络应用</strong></span><span class="SemanticString">需要不同的应用层协议。在互联网中应用层协议很多，如支持 Web 应用的 HTTP 协议，支持电子邮件的 SMTP 协议等等。</span></span></p></div><h3 id="https://www.notion.so/2700e55aebeb4eb3901260fdd0ee717e" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/2700e55aebeb4eb3901260fdd0ee717e"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">2.2 传输层</span></span></h3><div id="https://www.notion.so/3280d67bf7cb4fd18ba6098922878d20" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">传输层的主要任务就是负责向两台终端设备</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">进程</strong></span><span class="SemanticString">之间的通信提供通用的</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">数据传输</strong></span><span class="SemanticString">服务。应用进程利用该服务传送应用层报文。“通用的”是指并不针对某一个特定的网络应用，而是多种应用可以使用同一个运输层服务。运输层的分组称为</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">报文段</strong></span><span class="SemanticString">segement。</span></span></p></div><div id="https://www.notion.so/9ac890189c5040f2a73e304ebbbf4b3e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">传输层主要使用以下两种协议：传输控制协议 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">TCP</strong></span><span class="SemanticString">（Transmisson Control Protocol）——提供面向连接的，可靠的数据传输服务。用户数据协议 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">UDP</strong></span><span class="SemanticString">（User Datagram Protocol）——提供无连接的，尽力而为的数据传输服务（不保证数据传输的可靠性）。</span></span></p></div><h3 id="https://www.notion.so/0492a40eff9a401f917540dcb0b50fca" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/0492a40eff9a401f917540dcb0b50fca"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">2.3 网络层</span></span></h3><div id="https://www.notion.so/d08d1dfa4d574b5d9faf97342217eaa5" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">网络层负责为分组交换网上的不同</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">主机</strong></span><span class="SemanticString">提供</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">通信</strong></span><span class="SemanticString">服务。在发送数据时，网络层把运输层产生的报文段或用户数据报封装成分组和包进行传送。在 TCP/IP 体系结构中，由于网络层使用 IP 协议，因此分组也叫 IP 数据报，简称数据报datagram。网络层的还有一个任务就是选择合适的路由，使源主机运输层所传下来的分组，能通过网络层中的路由器找到目的主机。</span></span></p></div><div id="https://www.notion.so/068cb9f5ec8b476086750cd05b337960" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">互联网是由大量的异构（heterogeneous）网络通过路由器（router）相互连接起来的。互联网使用的网络层协议是无连接的网际协议（Internet Prococol）和许多路由选择协议，因此互联网的网络层也叫做IP层。</span></span></p></div><div id="https://www.notion.so/a75d5b8941a14cf7bd2ee429991eea74" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">网络层常见协议</strong></span><span class="SemanticString"> ：</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/6294b4cd8c954937bc86e09933ed835f" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">IP:网际协议</strong></span><span class="SemanticString"> ：网际协议 IP 是TCP/IP协议中最重要的协议之一，也是网络层最重要的协议之一，IP协议的作用包括寻址规约、定义数据包的格式等等，是网络层信息传输的主力协议。目前IP协议主要分为两种，一种是过去的IPv4，另一种是较新的IPv6，目前这两种协议都在使用，但后者已经被提议来取代前者。</span></span></li><li id="https://www.notion.so/6d8e52af9e1b44eaad78ca838e19d9c2" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">ARP 协议</strong></span><span class="SemanticString"> ：ARP协议，全称地址解析协议（Address Resolution Protocol），它解决的是</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">网络层地址和链路层地址之间的转换问题</strong></span><span class="SemanticString">。因为一个IP数据报在物理上传输的过程中，总是需要知道下一跳（物理上的下一个目的地）该去往何处，但IP地址属于逻辑地址，而MAC地址才是物理地址，ARP协议解决了IP地址转MAC地址的一些问题。</span></span></li><li id="https://www.notion.so/9aff4a4ccd5a44baa0e71e28a1558fed" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">NAT:网络地址转换协议</strong></span><span class="SemanticString"> ：NAT协议（Network Address Translation）的应用场景如同它的名称——网络地址转换，应用于</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">内部网到外部网的地址转换过程</strong></span><span class="SemanticString">中。具体地说，在一个小的子网（局域网，LAN）内，各主机使用的是同一个LAN下的IP地址，但在该LAN以外，在广域网（WAN）中，需要一个统一的IP地址来标识该LAN在整个Internet上的位置。</span></span></li></ul><h3 id="https://www.notion.so/643332a1bf1b4b1a97222ea05cc45fed" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/643332a1bf1b4b1a97222ea05cc45fed"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">2.4 网络接口层</span></span></h3><div id="https://www.notion.so/1a6243dfc5444885a209d897fcb44d5e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">可以把网络接口层看作是数据链路层和物理层的合体。</span></span></p></div><div id="https://www.notion.so/5b95d0e8f23f42e582a9fe06c0769849" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">数据链路层：</strong></span><span class="SemanticString">作用是将网络层交下来的 IP 数据报组装成</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">帧</strong></span><span class="SemanticString">frame，在两个相邻节点间的链路上传送帧。每一帧包括数据和必要的控制信息（如同步信息，地址信息，差错控制等）。</span></span></p></div><div id="https://www.notion.so/98c078dc04fd4653af915efffc35f774" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">物理层：</strong></span><span class="SemanticString">作用是实现相邻计算机节点之间比特流的透明传送，尽可能屏蔽掉具体传输介质和物理设备的差异。</span></span></p></div><h3 id="https://www.notion.so/74bd973ef9ee44d093a7605a6f3ba214" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/74bd973ef9ee44d093a7605a6f3ba214"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">2.5 每层主要协议</span></span></h3><h2 id="https://www.notion.so/e2f87340543e48699c68f5062ca6cbec" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/e2f87340543e48699c68f5062ca6cbec"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">三、网络为什么要分层？</span></span></h2><ol class="NumberedListWrapper"><li id="https://www.notion.so/2bb6720b108748e8b2ff632307a5dc04" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">各层之间相互独立</strong></span><span class="SemanticString">：各层之间相互独立，各层之间不需要关心其他层是如何实现的，只需要知道自己如何调用下层提供好的功能就可以了（可以简单理解为接口调用）</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">。这个和我们对开发时系统进行分层是一个道理。</strong></span></span></li><li id="https://www.notion.so/60f02d62d35b48daae81b735b031c95f" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">提高了整体灵活性</strong></span><span class="SemanticString"> ：每一层都可以使用最适合的技术来实现，你只需要保证你提供的功能以及暴露的接口的规则没有改变就行了。</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">这个和我们平时开发系统的时候要求的高内聚、低耦合的原则也是可以对应上的。</strong></span></span></li><li id="https://www.notion.so/d0ead4e56e8f443b9d332cfd3949ca67" class="NumberedList" value="3"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">大问题化小</strong></span><span class="SemanticString"> ： 分层可以将复杂的网络间题分解为许多比较小的、界线比较清晰简单的小问题来处理和解决。这样使得复杂的计算机网络系统变得易于设计，实现和标准化。 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">这个和我们平时开发的时候，一般会将系统功能分解，然后将复杂的问题分解为容易理解的更小的问题是相对应的，这些较小的问题具有更好的边界（目标和接口）定义。</strong></span></span></li></ol></article>
+  <footer class="Footer">
+  <div>&copy; Nick的博客 2022</div>
+  <div>&centerdot;</div>
+  <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
+      rel="noopener noreferrer">Notablog</a>.
+  </div>
+</footer>
+</body>
+
+</html>
