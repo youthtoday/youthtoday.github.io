@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;">
+
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>什么是锁&nbsp;|&nbsp;Nick的博客</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="什么是锁">
+  
+  
+  <style>
+    .DateTagBar {
+      margin-top: 1.0rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="Navbar">
+  <a href="index.html">
+    <div class="Navbar__Btn">
+      
+        <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+      
+      <span>Home</span>
+    </div>
+  </a>
+  
+    
+  
+    
+  
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="-fe1f32.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📚&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>分类</span>
+        </div>
+      </a>
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="about.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;😀&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>关于我</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+</nav>
+  <header class="Header">
+    
+    <div class="Header__Spacer Header__Spacer--NoCover">
+    </div>
+    
+    <h1 class="Header__Title">什么是锁</h1>
+    
+      <div class="DateTagBar">
+        
+        
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--pink">
+            <a href="tag/Java基础.html">Java基础</a>
+          </span>
+        
+      </div>
+    
+  </header>
+  <article id="https://www.notion.so/b8465960f0a94438b5c99a34aaee53fe" class="PageRoot"><h1 id="https://www.notion.so/c1563189b7084fc2887938737efe6d93" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/c1563189b7084fc2887938737efe6d93"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">场景描述</span></span></h1><div id="https://www.notion.so/87755ccff4e24478a2e6c5c6ae6493bf" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">锁</strong></span><span class="SemanticString">在JAVA中是一个非常重要的概念，尤其是在当今的互联网时代，高并发的场景下，更是离不开锁。那么锁到底是什么呢？在计算机科学中，锁(lock)或互斥(mutex)是一种同步机制，用于在有许多执行线程的环境中强制对资源的访问限制。锁旨在强制实施互斥排他、并发控制策略。咱们举一个生活中的例子：大家都去过超市买东西，如果你随身带了包呢，要放到储物柜里。咱们把这个例子再极端一下，假如柜子只有一个，现在同时来了3个人A，B，C，都要往这个柜子里放东西。这个场景就构造了一个多线程，多线程自然离不开锁。如下图所示：</span></span></p></div><div id="https://www.notion.so/5a464bcf31d04bd68ec393d31415a018" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F01b617de-c20b-409d-8386-e67d1ba9ff73%2FUntitled.png?width=778&amp;table=block&amp;id=5a464bcf-31d0-4bd6-8ec3-93d31415a018"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F01b617de-c20b-409d-8386-e67d1ba9ff73%2FUntitled.png?width=778&amp;table=block&amp;id=5a464bcf-31d0-4bd6-8ec3-93d31415a018" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/51cd63bf2e5049fabd1031b88e165dbe" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">A，B，C都要往柜子里放东西，可是柜子只能放一件东西，那怎么办呢？这个时候呢就引出了</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">锁</strong></span><span class="SemanticString">的概念，3个人中谁抢到了柜子的锁，谁就可以使用这个柜子，其他的人只能等待。比如：C抢到了锁，C可以使用这个柜子。A和B只能等待，等C使用完了，释放锁以后，A和B再争抢锁，谁抢到了，再继续使用柜子。</span></span></p></div><h1 id="https://www.notion.so/ab67d23605914c70ae1b627c4ead199d" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/ab67d23605914c70ae1b627c4ead199d"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">代码示例</span></span></h1><div id="https://www.notion.so/f84648012fa6410281dd210d64d3baed" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">我们再将上面的场景反应到程序中，首先创建一个柜子的类：</span></span></p></div><pre id="https://www.notion.so/cdce6b9637464aa8842848713d6e0bad" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Cabinet</span> <span class="token punctuation">{</span>
+<span class="token comment">//柜子中存储的数字</span>
+		<span class="token keyword">private</span> <span class="token keyword">int</span> storeNumber<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">setStoreNumber</span><span class="token punctuation">(</span><span class="token keyword">int</span> storeNumber<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>storeNumber <span class="token operator">=</span> storeNumber<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getStoreNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>storeNumber<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+<span class="token punctuation">}</span></span></span></span></code></pre><div id="https://www.notion.so/0546b98ed48648dd98b1db4141cb47a0" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">柜子中存储的是数字。</span></span></p></div><div id="https://www.notion.so/628557144ed84c35ace8c42a39be5497" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">然后我们将3个用户抽象成一个类：</span></span></p></div><pre id="https://www.notion.so/93563c25adfa4f09847cb835d03bb0d2" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">User</span> <span class="token punctuation">{</span>
+		<span class="token comment">//柜子</span>
+		<span class="token keyword">private</span> <span class="token class-name">Cabinet</span> cabinet<span class="token punctuation">;</span>
+		<span class="token comment">//存储的数字</span>
+		<span class="token keyword">private</span> <span class="token keyword">int</span> storeNumber<span class="token punctuation">;</span>
+
+    <span class="token keyword">public</span> <span class="token class-name">User</span><span class="token punctuation">(</span><span class="token class-name">Cabinet</span> cabinet<span class="token punctuation">,</span><span class="token keyword">int</span> storeNumber<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>cabinet <span class="token operator">=</span> cabinet<span class="token punctuation">;</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>storeNumber <span class="token operator">=</span> storeNumber<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+		<span class="token comment">//使用柜子</span>
+		<span class="token keyword">public</span> <span class="token keyword">void</span> <span class="token function">useCabinet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        cabinet<span class="token punctuation">.</span><span class="token function">setStoreNumber</span><span class="token punctuation">(</span>storeNumber<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></span></span></span></code></pre><div id="https://www.notion.so/f431a2aea833419db147dcb3a2408ccb" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">在用户的构造方法中，需要传入两个参数，一个是要使用的柜子，另一个是要存储的数字。到这里，柜子和用户都已经抽象成了类，接下来我们再写一个启动类，模拟一下3个用户使用柜子的场景：</span></span></p></div><pre id="https://www.notion.so/403fa2be403a48ab93fc6fee4218449f" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Starter</span> <span class="token punctuation">{</span>
+    <span class="token keyword">public</span> <span class="token keyword">static</span> <span class="token keyword">void</span> <span class="token function">main</span><span class="token punctuation">(</span><span class="token class-name">String</span><span class="token punctuation">[</span><span class="token punctuation">]</span> args<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token class-name">Cabinet</span> cabinet <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Cabinet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token class-name">ExecutorService</span> es <span class="token operator">=</span> <span class="token class-name">Executors</span><span class="token punctuation">.</span><span class="token function">newFixedThreadPool</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">for</span> <span class="token punctuation">(</span><span class="token keyword">int</span> i <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span> i <span class="token operator">&lt;</span> <span class="token number">3</span><span class="token punctuation">;</span> i<span class="token operator">++</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+            <span class="token keyword">final</span> <span class="token keyword">int</span>  storeNumber <span class="token operator">=</span> i<span class="token punctuation">;</span>
+            es<span class="token punctuation">.</span><span class="token function">execute</span><span class="token punctuation">(</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">-></span><span class="token punctuation">{</span>
+                <span class="token class-name">User</span> user <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">User</span><span class="token punctuation">(</span>cabinet<span class="token punctuation">,</span>storeNumber<span class="token punctuation">)</span><span class="token punctuation">;</span>
+                user<span class="token punctuation">.</span><span class="token function">useCabinet</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+                <span class="token class-name">System</span><span class="token punctuation">.</span>out<span class="token punctuation">.</span><span class="token function">println</span><span class="token punctuation">(</span><span class="token string">"我是用户"</span><span class="token operator">+</span>storeNumber<span class="token operator">+</span><span class="token string">",我存储的数字是："</span><span class="token operator">+</span>cabinet<span class="token punctuation">.</span><span class="token function">getStoreNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+            <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token punctuation">}</span>
+        es<span class="token punctuation">.</span><span class="token function">shutdown</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></span></span></span></code></pre><div id="https://www.notion.so/7071e129b66c458fb9ecd9f155d0bcb9" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">我们仔细的看一下这个main函数的过程，</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/a7fab0a7b5fe4edc82deddd70f8549df" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">首先创建一个柜子的实例，由于场景中只有一个柜子，所以我们只创建了一个柜子实例。</span></span></li><li id="https://www.notion.so/96a54a8212724d91ba6f17461bd6a834" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">然后我们新建一个线程池，线程池中有3个线程，每个线程执行一个用户的操作。</span></span></li><li id="https://www.notion.so/18f62295e7b84cd1a84bcc47cf24e1cb" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">再来看看每个线程具体的执行过程，新建用户实例，传入的是用户使用的柜子，我们这里只有一个柜子，所以传入这个柜子的实例，然后传入这个用户要存储的数字，分别是0，1，2，也分别对应着用户A，用户B，和用户C。</span></span></li><li id="https://www.notion.so/fcc3151d58e94946a70212a371312798" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">再调用使用柜子的操作，也就是向柜子中放入要存储的数字，然后立刻从柜子中取出数字，并打印出来。</span></span></li></ul><div id="https://www.notion.so/f6e216e48c804973bf26b8aaae1fc0b8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">我们运行一下main函数，看看打印的结果是什么？</span></span></p></div><pre id="https://www.notion.so/21e39e87a86543ec8afdd58756d149cb" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>我是用户0,我存储的数字是：2
+我是用户2,我存储的数字是：2
+我是用户1,我存储的数字是：2</span></span></span></code></pre><div id="https://www.notion.so/25936bad558f495dbe8e5f2eba1e87e8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">从结果中我们可以看出，3个用户在柜子中存储的数字都变成了2。我们再次运行程序，结果如下：</span></span></p></div><pre id="https://www.notion.so/ac2ad1c430ea4eb3b0822d70687b27ee" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>我是用户1,我存储的数字是：1
+我是用户2,我存储的数字是：1
+我是用户0,我存储的数字是：1</span></span></span></code></pre><div id="https://www.notion.so/883990113c744d58b23a19b46e2f0b22" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">这次又变成了1。这是为什么呢？问题就出在</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">user.useCabinet()</strong></code></span><span class="SemanticString">这个方法上，这是因为柜子这个实例没有加锁的原因，3个用户并行的执行，向柜子中存储他们的数字，虽然是3个用户并行的同时操作，但是在具体赋值时，也是有顺序的，因为变量</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">storeNumber</strong></code></span><span class="SemanticString">只占有一块内存，</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">storeNumber</strong></code></span><span class="SemanticString">只存储一个值，存储最后的线程所设置的值。至于哪个线程排在最后，则完全不确定。赋值语句执行完成后，进入到打印语句，打印语句取</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">storeNumber</strong></code></span><span class="SemanticString">的值并打印，这时</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">storeNumber</strong></code></span><span class="SemanticString">存储的是最后一个线程所设置的值，3个线程取到的值是相同的，就像上面打印的结果一样。</span></span></p></div><div id="https://www.notion.so/af025a00a6aa42938f24879eadfdb7a8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">那么如何解决这个问题？这就引出了我们本文的重点内容——</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">锁</strong></span><span class="SemanticString">。我们在赋值语句上加锁，这样当多个线程（本文当中的多个用户）同时赋值时，谁抢到了这把锁，谁才能赋值。这样保证同一时刻只能有一个线程进行赋值操作，避免了之前的混乱的情况。</span></span></p></div><div id="https://www.notion.so/680ed704ed2a479ea776425e84e56920" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">那么在程序中如何加锁呢？这就要使用JAVA中的一个关键字了——</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">。</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">分为</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">方法和</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">同步代码块。下面我们看一下两者的具体用法：</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/ec50335deb824479be20c34742a795f2" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">方法，顾名思义，是把</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">关键字写在方法上，它表示这个方法是加了锁的，当多个线程同时调用这个方法时，只有获得锁的线程才可以执行。我们看一下下面的例子：</span></span></li></ul><pre id="https://www.notion.so/f52572f092564a368e330240f86fb5d8" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>    <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token class-name">String</span> <span class="token function">getTicket</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token string">"xxx"</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span></span></span></span></code></pre><div id="https://www.notion.so/72fb8d2e26c041b183c974f348d710b8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">我们可以看到</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">getTicket()</strong></code></span><span class="SemanticString">方法加了锁，当多个线程并发执行的时候，只有获得到锁的线程才可以执行，其他的线程只能等待。</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/c85d25cf473441228d05f788603af89f" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">我们再来看看</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">块，</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">块的语法是：</span></span></li></ul><pre id="https://www.notion.so/f2dc657eab1842d7b8c027a28b8420fe" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span><span class="token keyword">synchronized</span> <span class="token punctuation">(</span>对象锁<span class="token punctuation">)</span><span class="token punctuation">{</span>
+    ……
+<span class="token punctuation">}</span></span></span></span></code></pre><div id="https://www.notion.so/81ac3013f30f475fbf0e1008723dcce9" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">我们将需要加锁的语句都写在</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">块内，而在对象锁的位置，需要填写加锁的对象，它的含义是，当多个线程并发执行时，只有获得你写的这个对象的锁，才能执行后面的语句，其他的线程只能等待。</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">块通常的写法是</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized(this)</strong></code></span><span class="SemanticString">，这个</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">this</strong></code></span><span class="SemanticString">是当前类的实例，也就是说获得当前这个类的对象的锁，才能执行这个方法，这样写的效果和</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">方法是一样的。</span></span></p></div><div id="https://www.notion.so/9fec7fb60300420fb16b9440870478a3" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">再回到我们的示例当中，如何解决</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">storeNumber</strong></code></span><span class="SemanticString">混乱的问题呢？咱们可以在设置</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">storeNumber</strong></code></span><span class="SemanticString">的方法上加上锁，这样保证同时只有一个线程能调用这个方法。如下所示：</span></span></p></div><pre id="https://www.notion.so/84a6c6c7a3c540eeab59765ce6adaf8b" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span><span class="token keyword">public</span> <span class="token keyword">class</span> <span class="token class-name">Cabinet</span> <span class="token punctuation">{</span>
+
+
+<span class="token comment">//柜子中存储的数字private int storeNumber;</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">synchronized</span> <span class="token keyword">void</span>  <span class="token function">setStoreNumber</span><span class="token punctuation">(</span><span class="token keyword">int</span> storeNumber<span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">this</span><span class="token punctuation">.</span>storeNumber <span class="token operator">=</span> storeNumber<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+
+    <span class="token keyword">public</span> <span class="token keyword">int</span> <span class="token function">getStoreNumber</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+        <span class="token keyword">return</span> <span class="token keyword">this</span><span class="token punctuation">.</span>storeNumber<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></span></span></span></code></pre><div id="https://www.notion.so/58db458f9a45431bbe61e094929fd6c3" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">我们在set方法上加了</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">synchronized</strong></code></span><span class="SemanticString">关键字，这样在存储数字时，就不会并行的去执行了，而是哪个用户抢到锁，哪个用户执行存储数字的方法。我们再运行一下main函数，看看运行的结果：</span></span></p></div><pre id="https://www.notion.so/22f56435695746609bd176d91aa3a2a2" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span>我是用户1,我存储的数字是：1
+我是用户2,我存储的数字是：2
+我是用户0,我存储的数字是：0</span></span></span></code></pre><div id="https://www.notion.so/065569becc274527991bcfdb66c18915" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">由于set方法上加了锁，不会并发的执行这个方法，而是一个线程一个线程的去执行，这样用户存储的数字，和取出的数字就对应上了，不会造成混乱。</span></span></p></div><div id="https://www.notion.so/95bbbd8757d34faa960cf19262683bba" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">最后我们通过一张图上面示例的整体情况。</span></span></p></div><div id="https://www.notion.so/3b8bfbd13d4d4835a9cbf7cd13ad1fe0" class="Image Image--PageWidth"><figure><a href="#"><img src="#" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/2a4b09df3fdf4ff39875a8f88d8b7d90" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">如上图所示，线程A，线程B，线程C同时调用</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">Cabinet</strong></code></span><span class="SemanticString">类的</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">setStoreNumber</strong></code></span><span class="SemanticString">方法，线程B获得了锁，所以线程B可以执行</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">setStoreNumber</strong></code></span><span class="SemanticString">的方法，线程A和线程C只能等待。</span></span></p></div><h1 id="https://www.notion.so/90861eed1d564741a14bb1e439512ffb" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/90861eed1d564741a14bb1e439512ffb"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">总结</strong></span></span></h1><div id="https://www.notion.so/98f0f3bfcc1a44e89a4a2f1e53307167" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">通过上面的场景与示例，我们可以了解多线程情况下，造成的变量值前后不一致的问题，以及</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">锁</strong></span><span class="SemanticString">的作用。在使用了锁以后，可以避免这种混乱的现象。在下一节中，我们将给大家介绍JAVA中都有哪些关于锁的解决方案。</span></span></p></div></article>
+    <script src="https://utteranc.es/client.js"
+        repo="youthtoday/youthtoday.github.io"
+        issue-term="pathname"
+        label="✨"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  <footer class="Footer">
+  <div>&copy; Nick的博客 2022</div>
+  <div>&centerdot;</div>
+  <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
+      rel="noopener noreferrer">Notablog</a>.
+  </div>
+</footer>
+</body>
+
+</html>
