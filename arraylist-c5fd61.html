@@ -24,9 +24,9 @@
     font-size: 20px;
   }
 </style>
-  <title>Java并发2&nbsp;|&nbsp;Nick的博客</title>
+  <title>ArrayList扩容机制&nbsp;|&nbsp;Nick的博客</title>
   <meta property="og:type" content="blog">
-  <meta property="og:title" content="Java并发2">
+  <meta property="og:title" content="ArrayList扩容机制">
   
   
   <style>
@@ -121,7 +121,7 @@
     <div class="Header__Spacer Header__Spacer--NoCover">
     </div>
     
-    <h1 class="Header__Title">Java并发2</h1>
+    <h1 class="Header__Title">ArrayList扩容机制</h1>
     
       <div class="DateTagBar">
         
@@ -130,14 +130,15 @@
             <a href="tag/Java基础.html">Java基础</a>
           </span>
         
-          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
-            <a href="tag/并发编程.html">并发编程</a>
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--default">
+            <a href="tag/Java集合.html">Java集合</a>
           </span>
         
       </div>
     
   </header>
-  <article id="https://www.notion.so/066c3d46335a439a9043665ada18fc85" class="PageRoot"><h1 id="https://www.notion.so/5501c9fa16104a0493c1d7bb3d34cfea" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/5501c9fa16104a0493c1d7bb3d34cfea"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">JMM Java内存模型</span></span></h1><div id="https://www.notion.so/816137ca8ac943e1b1a9f3d7a36fb342" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">JMM主要定义了对于一个共享变量，当另一个线程对这个共享变量执行写操作后，这个线程对这个共享变量的可见性。</span></span></p></div><div id="https://www.notion.so/7eabbed962924deb8d79df9a62cee101" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div></article>
+  <article id="https://www.notion.so/c5fd6184762f4b76a43e355211be9a5b" class="PageRoot"><div id="https://www.notion.so/29ae5d2f1f6845358ef0fef4e596a7e7" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">总的来说，ArrayList扩容机制分为以下步骤</span></span></p></div><ol class="NumberedListWrapper"><li id="https://www.notion.so/cfa5c53daaa44d3f924539c1d6fe06e2" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString">无参初始化：初始化默认长度为10的列表（创建时为空，添加第一个元素才扩充至10）
+有参初始化：初始化指定长度的列表</span></span></li><li id="https://www.notion.so/d3fd7a42332f4489a8934cc445c8d410" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString">添加元素：如果没有占满列表则直接添加。如果占满了，用</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">grow()</strong></span><span class="SemanticString">方法扩容至</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">newCapacity = oldCapacity + (oldCapacity &gt;&gt; 1)</strong></code></span></span></li><li id="https://www.notion.so/6531d2e50f94490483dbecf07b16bf57" class="NumberedList" value="3"><span class="SemanticStringArray"><span class="SemanticString">判断新容量大小：如果新容量大小大于</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">MAX_ARRAY_SIZE</code></span><span class="SemanticString">即</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">Integer.MAX_VALUE-8</code></span><span class="SemanticString">，则比较</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">MAX_ARRAY_SIZE</code></span><span class="SemanticString">和</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">minCapacity</code></span><span class="SemanticString">。如果</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">minCapacity</code></span><span class="SemanticString">大于最大容量，则新容量为</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">Integer.MAX_VALUE</code></span><span class="SemanticString">，否则新容量大小为</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">MAX_ARRAY_SZIE</code></span><span class="SemanticString">。</span></span></li></ol><div id="https://www.notion.so/21b34cf0278241a58af02e17c14ffa90" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div></article>
     <script src="https://utteranc.es/client.js"
         repo="youthtoday/youthtoday.github.io"
         issue-term="pathname"
