@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;">
+
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>MySQL事务&nbsp;|&nbsp;Nick的博客</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="MySQL事务">
+  
+  
+  <style>
+    .DateTagBar {
+      margin-top: 1.0rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="Navbar">
+  <a href="index.html">
+    <div class="Navbar__Btn">
+      
+        <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+      
+      <span>Home</span>
+    </div>
+  </a>
+  
+    
+  
+    
+  
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="-fe1f32.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📚&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>分类</span>
+        </div>
+      </a>
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="about.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;😀&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>关于我</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+</nav>
+  <header class="Header">
+    
+    <div class="Header__Spacer Header__Spacer--NoCover">
+    </div>
+    
+    <h1 class="Header__Title">MySQL事务</h1>
+    
+      <div class="DateTagBar">
+        
+        
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
+            <a href="tag/MySQL.html">MySQL</a>
+          </span>
+        
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
+            <a href="tag/数据库.html">数据库</a>
+          </span>
+        
+      </div>
+    
+  </header>
+  <article id="https://www.notion.so/5fd623dcae99476fa39779d3e7049d7e" class="PageRoot"><h1 id="https://www.notion.so/eaeb218aa08a4d7390979ca6fb0b3580" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/eaeb218aa08a4d7390979ca6fb0b3580"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">MySQL事务</span></span></h1><h2 id="https://www.notion.so/c8a0b6f27f7c44b6b078c5c65b7a39b8" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/c8a0b6f27f7c44b6b078c5c65b7a39b8"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">什么是事务？</span></span></h2><div id="https://www.notion.so/59c4d7bc53724e5abdaae3f7dc36231a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">事务是为了保证数据一致性的抽象的机制。事务是逻辑上的一组操作，要么都执行，要么都不执行。</span></span></p></div><div id="https://www.notion.so/6f9ae777520341269600bd4feafa65fe" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">比如A要给B转账100元，这里涉及到两个操作：A扣除100元，B增加100元。事务将这两个操作看作是逻辑上的一个整体，要么都成功、要么都失败。</span></span></p></div><h2 id="https://www.notion.so/2d144a17bfc44193b121636c5c29b1f4" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/2d144a17bfc44193b121636c5c29b1f4"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">什么是数据库事务？</span></span></h2><div id="https://www.notion.so/cf6d0ef77f244748a7b82346978aac8d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">数据库事务可以保证多个对数据库的操作（SQL语句）构成一个逻辑上的整体，遵循要么全部执行成功、要么全部执行失败。</span></span></p></div><pre id="https://www.notion.so/c2c083c6d61f428fa53e1ce59de13c6b" class="Code"><code><span class="SemanticStringArray"><span class="SemanticString"><span><span class="token comment"># 开启一个事务</span>
+<span class="token keyword">START</span> <span class="token keyword">TRANSACTION</span><span class="token punctuation">;</span>
+<span class="token comment"># 多条 SQL 语句</span>
+SQL1<span class="token punctuation">,</span>SQL2<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token comment">## 提交事务</span>
+<span class="token keyword">COMMIT</span><span class="token punctuation">;</span></span></span></span></code></pre><div id="https://www.notion.so/89e34871ce744e599fae33174b1555ac" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fef372d29-a41e-4765-9dea-b1a80159a900%2FUntitled.png?width=881&amp;table=block&amp;id=89e34871-ce74-4e59-9fae-33174b1555ac"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fef372d29-a41e-4765-9dea-b1a80159a900%2FUntitled.png?width=881&amp;table=block&amp;id=89e34871-ce74-4e59-9fae-33174b1555ac" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h2 id="https://www.notion.so/53d03a78569f41fc85322492dc329c46" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/53d03a78569f41fc85322492dc329c46"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">ACID特性</span></span></h2><div id="https://www.notion.so/dd48ccb58eb64e3a985fd615cdc4fe39" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">关系型数据库（例如：</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">MySQL</code></span><span class="SemanticString">、</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">SQL Server</code></span><span class="SemanticString">、</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">Oracle</code></span><span class="SemanticString">等）事务都有 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">ACID</strong></span><span class="SemanticString">特性：</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/d51baf8734884f9d9d8a14976917e384" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">原子性</strong></span><span class="SemanticString">（</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">Atomicity</code></span><span class="SemanticString">） ： 事务是最小的执行单位，不允许分割。事务的原子性确保动作要么全部完成，要么完全不起作用；</span></span></li><li id="https://www.notion.so/eae99b9dfc184170829c25a87c129053" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">一致性</strong></span><span class="SemanticString">（</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">Consistency</code></span><span class="SemanticString">）： 执行事务前后，数据保持一致，例如转账业务中，无论事务是否成功，转账者和收款人的总额应该是不变的；</span></span></li><li id="https://www.notion.so/946087de07414a4ea9f64ae3164b9019" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">隔离性</strong></span><span class="SemanticString">（</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">Isolation</code></span><span class="SemanticString">）： 并发访问数据库时，一个用户的事务不被其他事务所干扰，各并发事务之间数据库是独立的；</span></span></li><li id="https://www.notion.so/543daa4e7f8c4f7bb7aaab40a7ee01c4" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">持久性</strong></span><span class="SemanticString">（</span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">Durability</code></span><span class="SemanticString">）： 一个事务被提交之后。它对数据库中数据的改变是持久的，即使数据库发生故障也不应该对其有任何影响。</span></span></li></ul><div id="https://www.notion.so/2924d94697dc43e7a6e8e29f9ec72fdf" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">只有保证了事务的持久性、原子性、隔离性之后，一致性才能得到保障。也就是说 A、I、D 是手段，C 是目的！</strong></span></span></p></div><h2 id="https://www.notion.so/6889d8c747234b1ba59b90b7619fcf0e" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/6889d8c747234b1ba59b90b7619fcf0e"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">并发事务引发的问题</span></span></h2><div id="https://www.notion.so/0ba63a3effb94e03a7aaa42f4754244a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">多个事务并发运行，会导致操作相同的数据来完成各自的任务。可能导致以下问题。</span></span></p></div><h3 id="https://www.notion.so/1249b0e99213453abea0dd8886b7f63b" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/1249b0e99213453abea0dd8886b7f63b"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">脏读</span></span></h3><div id="https://www.notion.so/171193e4c6014c10974a896febcfc185" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">一个事务读取数据并且对数据进行了修改，这个修改对其他事务来说是可见的，即使当前事务没有提交。这时另外一个事务读取了这个还未提交的数据，但第一个事务突然回滚，导致数据并没有被提交到数据库，那第二个事务读取到的就是脏数据，这也就是脏读的由来。</span></span></p></div><div id="https://www.notion.so/40ba7ab574c5460abd313ce0387ad4c1" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">例如：事务 1 读取某表中的数据 A=20，事务 1 修改 A=A-1，事务 2 读取到 A = 19,事务 1 回滚导致对 A 的修改并为提交到数据库， A 的值还是 20。</span></span></p></div><div id="https://www.notion.so/ab10be64c67442a0a63d4b98e7ccad5c" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F1d9ca341-b894-452a-87d5-83447a550287%2FUntitled.png?width=741&amp;table=block&amp;id=ab10be64-c674-42a0-a63d-4b98e7ccad5c"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F1d9ca341-b894-452a-87d5-83447a550287%2FUntitled.png?width=741&amp;table=block&amp;id=ab10be64-c674-42a0-a63d-4b98e7ccad5c" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h3 id="https://www.notion.so/515344deafe7414fb4a56d258854962b" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/515344deafe7414fb4a56d258854962b"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">修改丢失</span></span></h3><div id="https://www.notion.so/275317ff9f9c49528ac653f9b99230ce" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">在一个事务读取一个数据时，另外一个事务也访问了该数据，那么在第一个事务中修改了这个数据后，第二个事务也修改了这个数据。这样第一个事务内的修改结果就被丢失，因此称为丢失修改。</span></span></p></div><div id="https://www.notion.so/1972ebe27041402cb7e1ddd54596d1a5" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">例如：事务 1 读取某表中的数据 A=20，事务 2 也读取 A=20，事务 1 先修改 A=A-1，事务 2 后来也修改 A=A-1，最终结果 A=19，事务 1 的修改被丢失。</span></span></p></div><div id="https://www.notion.so/37a4cd6625324fcfa50d881d9be6cde2" class="Image Image--Normal"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F68cbe9b8-4049-46d3-9933-79f499886287%2FUntitled.png?width=624&amp;table=block&amp;id=37a4cd66-2532-4fcf-a50d-881d9be6cde2"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F68cbe9b8-4049-46d3-9933-79f499886287%2FUntitled.png?width=624&amp;table=block&amp;id=37a4cd66-2532-4fcf-a50d-881d9be6cde2" style="width:624px"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h3 id="https://www.notion.so/3c1901523b0f44a6b8a7dc66ce6de7fd" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/3c1901523b0f44a6b8a7dc66ce6de7fd"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">不可重复读</span></span></h3><div id="https://www.notion.so/8f76b84349d441de99c5c5b6207fe8c5" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">指在一个事务内多次读同一数据。在这个事务还没有结束时，另一个事务也访问该数据。那么，在第一个事务中的两次读数据之间，由于第二个事务的修改导致第一个事务两次读取的数据可能不太一样。这就发生了在一个事务内两次读到的数据是不一样的情况，因此称为不可重复读。</span></span></p></div><div id="https://www.notion.so/ccfb698566bc4b8db99d6bc24948324f" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">例如：事务 1 读取某表中的数据 A=20，事务 2 也读取 A=20，事务 1 修改 A=A-1，事务 2 再次读取 A =19，此时读取的结果和第一次读取的结果不同。</span></span></p></div><div id="https://www.notion.so/6bcfc945ca5c415fb4ebd4a5728f408b" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F326df179-1151-41f6-8c40-3174577f110d%2FUntitled.png?width=741&amp;table=block&amp;id=6bcfc945-ca5c-415f-b4eb-d4a5728f408b"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F326df179-1151-41f6-8c40-3174577f110d%2FUntitled.png?width=741&amp;table=block&amp;id=6bcfc945-ca5c-415f-b4eb-d4a5728f408b" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h3 id="https://www.notion.so/86b5c0de9df84c449d09367b6c1ba996" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/86b5c0de9df84c449d09367b6c1ba996"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">幻读</span></span></h3><div id="https://www.notion.so/ad05a80f017545b083fa08f3b0780566" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">幻读与不可重复读类似。它发生在一个事务读取了几行数据，接着另一个并发事务插入了一些数据时。在随后的查询中，第一个事务就会发现多了一些原本不存在的记录，就好像发生了幻觉一样，所以称为幻读。</span></span></p></div><div id="https://www.notion.so/bac0f7d0666f45edad4380b16c71a538" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">例如：事务 2 读取某个范围的数据，事务 1 在这个范围插入了新的数据，事务 2 再次读取这个范围的数据发现相比于第一次读取的结果多了新的数据。</span></span></p></div><div id="https://www.notion.so/2d2544b37e3f4bb0bc8d315d1260312b" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fbad5e350-ea1e-456c-83a7-8b5c760123c6%2FUntitled.png?width=731&amp;table=block&amp;id=2d2544b3-7e3f-4bb0-bc8d-315d1260312b"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fbad5e350-ea1e-456c-83a7-8b5c760123c6%2FUntitled.png?width=731&amp;table=block&amp;id=2d2544b3-7e3f-4bb0-bc8d-315d1260312b" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h3 id="https://www.notion.so/a71174f89ee6446ca2f81a11346a6026" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/a71174f89ee6446ca2f81a11346a6026"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">不可重复读与幻读的区别</span></span></h3><ul class="BulletedListWrapper"><li id="https://www.notion.so/5e3da7da374843ea95a2b121990b5105" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">不可重复读的重点是</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">内容修改</strong></span><span class="SemanticString">或者</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">记录减少</strong></span><span class="SemanticString">比如多次读取一条记录发现其中某些记录的值被修改；</span></span></li><li id="https://www.notion.so/bbf267eef8cf429b9c47c23cb69f979b" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">幻读的重点在于</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">记录新增</strong></span><span class="SemanticString">比如多次执行同一条查询语句（DQL）时，发现查到的记录增加了。</span></span></li></ul><div id="https://www.notion.so/279a9aa4cd7842488e46aad5833d2bc1" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">幻读其实可以看作是不可重复读的一种特殊情况，单独把区分幻读的原因主要是解决幻读和不可重复读的方案不一样。</span></span></p></div><div id="https://www.notion.so/1d96ffd28f8840e785243b5525d5c490" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">举个例子：执行 </span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">delete</code></span><span class="SemanticString"> 和 </span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">update</code></span><span class="SemanticString"> 操作的时候，可以直接对记录加锁，保证事务安全。而执行 </span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">insert</code></span><span class="SemanticString"> 操作的时候，由于记录锁（Record Lock）只能锁住已经存在的记录，为了避免插入新记录，需要依赖间隙锁（Gap Lock）。也就是说执行 </span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">insert</code></span><span class="SemanticString"> 操作的时候需要依赖 Next-Key Lock（Record Lock+Gap Lock） 进行加锁来保证不出现幻读。</span></span></p></div><h3 id="https://www.notion.so/fa9951fd056e4bf2b059ac985fac622c" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/fa9951fd056e4bf2b059ac985fac622c"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">并发事务的控制方式有哪些？</span></span></h3><div id="https://www.notion.so/05d1e0b0afd246cabfe1ce96b1a92602" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MySQL 中并发事务的控制方式无非就两种：</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">锁</strong></span><span class="SemanticString"> 和 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">MVCC</strong></span><span class="SemanticString">。锁可以看作是悲观控制的模式，多版本并发控制（MVCC，Multiversion concurrency control）可以看作是乐观控制的模式。</span></span></p></div><div id="https://www.notion.so/1fd69068650748bfa55e420b4c49abbe" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">锁</strong></span><span class="SemanticString">控制方式下会通过锁来显示控制共享资源而不是通过调度手段，MySQL 中主要是通过 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">读写锁</strong></span><span class="SemanticString"> 来实现并发控制。</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/1fb525e1f8564074a5b008524f1da351" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">共享锁（S 锁）</strong></span><span class="SemanticString"> ：又称读锁，事务在读取记录的时候获取共享锁，允许多个事务同时获取（锁兼容）。</span></span></li><li id="https://www.notion.so/83cf6df63c094a45bc42f8a2697423e3" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">排他锁（X 锁）</strong></span><span class="SemanticString"> ：又称写锁/独占锁，事务在修改记录的时候获取排他锁，不允许多个事务同时获取。如果一个记录已经被加了排他锁，那其他事务不能再对这条记录加任何类型的锁（锁不兼容）。</span></span></li></ul><div id="https://www.notion.so/a31ae71764ee4e5db6e4fb8fd3a2c225" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">读写锁可以做到读读并行，但是无法做到写读、写写并行。另外，根据根据锁粒度的不同，又被分为 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">表级锁(table-level locking)</strong></span><span class="SemanticString"> 和 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">行级锁(row-level locking)</strong></span><span class="SemanticString"> 。InnoDB 不光支持表级锁，还支持行级锁，默认为行级锁。行级锁的粒度更小，仅对相关的记录上锁即可（对一行或者多行记录加锁），所以对于并发写入操作来说， InnoDB 的性能更高。不论是表级锁还是行级锁，都存在共享锁（Share Lock，S 锁）和排他锁（Exclusive Lock，X 锁）这两类。</span></span></p></div><div id="https://www.notion.so/3df88496930e4288971052026551e0dc" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">MVCC</strong></span><span class="SemanticString"> 是多版本并发控制方法，即对一份数据会存储多个版本，通过事务的可见性来保证事务能看到自己应该看到的版本。通常会有一个全局的版本分配器来为每一行数据设置版本号，版本号是唯一的。</span></span></p></div><div id="https://www.notion.so/f23cd624ac514103b6be5c40de07c214" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MVCC 在 MySQL 中实现所依赖的手段主要是: </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">隐藏字段、read view、undo log</strong></span><span class="SemanticString">。</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/636db07b12ff45eb9d7538c414ba6a2f" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">undo log : undo log 用于记录某行数据的多个版本的数据。</span></span></li><li id="https://www.notion.so/30b94703039145ba9e1d4752ad484127" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">read view 和 隐藏字段 : 用来判断当前版本数据的可见性。</span></span></li></ul><h3 id="https://www.notion.so/8701d897eca3466ba99f670ed7d5544b" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/8701d897eca3466ba99f670ed7d5544b"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">SQL 标准定义了哪些事务隔离级别?</span></span></h3><div id="https://www.notion.so/0ea2c7d0a4ff4ababc128c5116ac8498" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">SQL 标准定义了四个隔离级别：</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/b3924927752d40baa4588618cf28eeae" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">READ-UNCOMMITTED(读取未提交)</strong></span><span class="SemanticString"> ： 最低的隔离级别，允许读取尚未提交的数据变更，可能会导致脏读、幻读或不可重复读。</span></span></li><li id="https://www.notion.so/b226f300c5d64ef4a51b6662b3abc044" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">READ-COMMITTED(读取已提交)</strong></span><span class="SemanticString"> ： 允许读取并发事务已经提交的数据，可以阻止脏读，但是幻读或不可重复读仍有可能发生。</span></span></li><li id="https://www.notion.so/db72f530d8154d5c967b3b16f2791992" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">REPEATABLE-READ(可重复读)</strong></span><span class="SemanticString"> ： 对同一字段的多次读取结果都是一致的，除非数据是被本身事务自己所修改，可以阻止脏读和不可重复读，但幻读仍有可能发生。</span></span></li><li id="https://www.notion.so/fb2845a47e7c4ce2ac42600d525b17b3" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">SERIALIZABLE(可串行化)</strong></span><span class="SemanticString"> ： 最高的隔离级别，完全服从 ACID 的隔离级别。所有的事务依次逐个执行，这样事务之间就完全不可能产生干扰，也就是说，该级别可以防止脏读、不可重复读以及幻读。</span></span></li></ul><div><div></div><div></div><div></div><div></div><div></div></div><h3 id="https://www.notion.so/16be5744ca684b6abeec4c9faac42a0b" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/16be5744ca684b6abeec4c9faac42a0b"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">MySQL 的隔离级别是基于锁实现的吗？</span></span></h3><div id="https://www.notion.so/e1c6f2d7fe764983893842e3f68647b3" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MySQL 的隔离级别基于锁和 MVCC 机制共同实现的。</span></span></p></div><div id="https://www.notion.so/67f82b508a3f47eaa7657a85dc0ed7a2" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">SERIALIZABLE 隔离级别是通过锁来实现的，READ-COMMITTED 和 REPEATABLE-READ 隔离级别是基于 MVCC 实现的。不过， SERIALIZABLE 之外的其他隔离级别可能也需要用到锁机制，就比如 REPEATABLE-READ 在当前读情况下需要使用加锁读来保证不会出现幻读。</span></span></p></div><h3 id="https://www.notion.so/4943c76351324531a124853b426fd515" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--3"><a class="Anchor" href="#https://www.notion.so/4943c76351324531a124853b426fd515"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">MySQL 的默认隔离级别是什么?</strong></span></span></h3><div id="https://www.notion.so/6725b7cd857f452c91d899d1d403ad10" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MySQL InnoDB 存储引擎的默认支持的隔离级别是 </span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">REPEATABLE-READ（可重读）</strong></span><span class="SemanticString">。</span></span></p></div><div id="https://www.notion.so/ab58f4fdbe404cc3bfa550bbdad32acc" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div></article>
+    <script src="https://utteranc.es/client.js"
+        repo="youthtoday/youthtoday.github.io"
+        issue-term="pathname"
+        label="✨"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  <footer class="Footer">
+  <div>&copy; Nick的博客 2022</div>
+  <div>&centerdot;</div>
+  <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
+      rel="noopener noreferrer">Notablog</a>.
+  </div>
+</footer>
+</body>
+
+</html>

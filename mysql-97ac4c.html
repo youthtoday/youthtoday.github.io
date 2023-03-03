@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;">
+
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>MySQL存储引擎&nbsp;|&nbsp;Nick的博客</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="MySQL存储引擎">
+  
+  
+  <style>
+    .DateTagBar {
+      margin-top: 1.0rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="Navbar">
+  <a href="index.html">
+    <div class="Navbar__Btn">
+      
+        <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+      
+      <span>Home</span>
+    </div>
+  </a>
+  
+    
+  
+    
+  
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="-fe1f32.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📚&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>分类</span>
+        </div>
+      </a>
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="about.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;😀&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>关于我</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+</nav>
+  <header class="Header">
+    
+    <div class="Header__Spacer Header__Spacer--NoCover">
+    </div>
+    
+    <h1 class="Header__Title">MySQL存储引擎</h1>
+    
+      <div class="DateTagBar">
+        
+        
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
+            <a href="tag/MySQL.html">MySQL</a>
+          </span>
+        
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
+            <a href="tag/数据库.html">数据库</a>
+          </span>
+        
+      </div>
+    
+  </header>
+  <article id="https://www.notion.so/97ac4cf56cfc472c99a5d729af9a9e4c" class="PageRoot"><h1 id="https://www.notion.so/085f547ed99342a3bc0d03394c821e0b" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/085f547ed99342a3bc0d03394c821e0b"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">MySQL存储引擎</span></span></h1><div id="https://www.notion.so/c44247c901104f269c2ecc0c0456dc7e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MySQL 支持多种存储引擎，你可以通过 </span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">show engines</code></span><span class="SemanticString">命令来查看 MySQL 支持的所有存储引擎。</span></span></p></div><div id="https://www.notion.so/b0502eb6c5bc483b9fd1534a47d5aeb0" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6e85275d-02d0-4c7c-8507-11e3c6c22ad3%2FUntitled.png?width=979&amp;table=block&amp;id=b0502eb6-c5bc-483b-9fd1-534a47d5aeb0"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F6e85275d-02d0-4c7c-8507-11e3c6c22ad3%2FUntitled.png?width=979&amp;table=block&amp;id=b0502eb6-c5bc-483b-9fd1-534a47d5aeb0" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/e74b876fb2cb4b3bb9582d273aa0ac0c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">所有的存储引擎中只有InnoDB是事务性存储引擎，也就是说只有InnoDB支持事务。</span></span></p></div><h2 id="https://www.notion.so/d776423e2be141c58a3d936965ead810" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/d776423e2be141c58a3d936965ead810"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">存储引擎架构</span></span></h2><div id="https://www.notion.so/33f5bfb920194f0b9eaacde260e13dba" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MySQL存储引擎采取的是</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">插件式架构</strong></span><span class="SemanticString">，支持多种存储引擎。并且可以为</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">不同的数据库表</strong></span><span class="SemanticString">设置不同的存储引擎。</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">存储引擎是针对表</strong></span><span class="SemanticString">的，不是数据库。</span></span></p></div><div id="https://www.notion.so/0b680e1684624a34bd1549fe380d7367" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">还可以根据MySQL定义的存储引擎标准来编写一个属于自己的存储引擎。这些非官方的存储引擎可以称为</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">第三方存储引擎</strong></span><span class="SemanticString">。InnoDB最开始就是第三方存储引擎，后来被Oracle官方收购。</span></span></p></div><h2 id="https://www.notion.so/8ebe2d0d4fee4e298b3cded46aabefcf" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/8ebe2d0d4fee4e298b3cded46aabefcf"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">MyISAM和InnoDB的区别</span></span></h2><div id="https://www.notion.so/4c0675f3a9fb405893d600e806af1814" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MySQL5.5之前使用MyISAM，缺点是不支持事务和行级锁，最大缺陷是崩溃后无法安全恢复。</span></span></p></div><div id="https://www.notion.so/b73d6f4100294e6aa59064d3b3101240" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MySQL5.5之后使用InnoDB。</span></span></p></div><div id="https://www.notion.so/8d5ea55facb84f758f662787b7c5cff4" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">1.是否支持行级锁</strong></span></span></p></div><div id="https://www.notion.so/c3a6dfeeb2ae4f589b3cbd7267da4a8f" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MyISAM 只有表级锁(table-level locking)，而 InnoDB 支持行级锁(row-level locking)和表级锁,默认为行级锁。</span></span></p></div><div id="https://www.notion.so/c1bce6f61eb54cdb864fb214fd78d64a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">2.是否支持事务</strong></span></span></p></div><div id="https://www.notion.so/70b3e2c4444348ffaad8a60cb1df751d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MyISAM 不提供事务支持。InnoDB 提供事务支持，实现了 SQL 标准定义了四个隔离级别，具有提交(commit)和回滚(rollback)事务的能力。并且，InnoDB 默认使用的 REPEATABLE-READ（可重读）隔离级别是可以解决幻读问题发生的（基于 MVCC 和 Next-Key Lock）。</span></span></p></div><div id="https://www.notion.so/fb5a53b687604d4b857c4aa3eeba1e8f" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">3.是否支持外键</strong></span></span></p></div><div id="https://www.notion.so/5c5d030734a8408c8460bdfbb4323bc1" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MyISAM 不支持，而 InnoDB 支持。</span></span></p></div><div id="https://www.notion.so/38ec752724024c719be2c7cb5f2cbd68" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">外键对于维护数据一致性非常有帮助，但是对性能有一定的损耗。因此，通常情况下，我们是不建议在实际生产项目中使用外键的，在业务代码中进行约束即可！</span></span></p></div><div id="https://www.notion.so/e8d2c64e7a7f489dafb1292140102b8e" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">阿里的《Java 开发手册》也是明确规定禁止使用外键的。比如学生表中的student_id是主键，成绩表中的student_id是外键。如果更新学生表中的student_id，同时触发成绩表中的student_id就是级联更新。级联更新适用于单机低发，不适合分布式、高并发集群。</span></span></p></div><div id="https://www.notion.so/94f6028ad2ac484786792dd46b467bd2" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">4.是否支持数据库异常崩溃后的安全恢复</strong></span></span></p></div><div id="https://www.notion.so/e472d6ee2f204e51b50c89b74a3e43af" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MyISAM 不支持，而 InnoDB 支持。</span></span></p></div><div id="https://www.notion.so/544b964e407b4e649affdaf224b56c40" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">使用 InnoDB 的数据库在异常崩溃后，数据库重新启动的时候会保证数据库恢复到崩溃前的状态。这个恢复的过程依赖于 </span><span class="SemanticString"><code class="SemanticString__Fragment SemanticString__Fragment--Code">redo log</code></span><span class="SemanticString"> 。</span></span></p></div><div id="https://www.notion.so/d0555d1f48a9499b85b13c8b6c98285d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">5.是否支持 MVCC</strong></span></span></p></div><div id="https://www.notion.so/7654c93cc44147f7ba1dcbe3122c01b0" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MyISAM 不支持，而 InnoDB 支持。</span></span></p></div><div id="https://www.notion.so/9a3a048f7635459ba99ef71f83d97362" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">MVCC 可以看作是行级锁的一个升级，可以有效减少加锁操作，提高性能。而MyISAM连行级锁都不支持。</span></span></p></div><div id="https://www.notion.so/4aab3e8a8aab4bdc8675a1bddbb20261" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">6.索引实现不一样。</strong></span></span></p></div><div id="https://www.notion.so/df60ca81e9ea40c79cbe739551f977b0" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">虽然 MyISAM 引擎和 InnoDB 引擎都是使用 B+Tree 作为索引结构，但是两者的实现方式不太一样。</span></span></p></div><div id="https://www.notion.so/5750227d07cd4a58ab5b4f562d707e85" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">InnoDB 引擎中，其数据文件本身就是索引文件。相比 MyISAM，索引文件和数据文件是分离的，其表数据文件本身就是按 B+Tree 组织的一个索引结构，树的叶节点 data 域保存了完整的数据记录。</span></span></p></div><div id="https://www.notion.so/15438d741940478186ff978d5d06b084" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">7.性能有差别。</strong></span></span></p></div><div id="https://www.notion.so/15b6b007f1374503bee686c94c77f7c5" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">InnoDB 的性能比 MyISAM 更强大，不管是在读写混合模式下还是只读模式下，随着 CPU 核数的增加，InnoDB 的读写能力呈线性增长。MyISAM 因为读写不能并发，它的处理能力跟核数没关系。</span></span></p></div><div id="https://www.notion.so/e3486b0452af494c94b71f357b5aa487" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">总结</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/e538b4d29fb04dafbfcecf7d3018c5e4" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">InnoDB 支持行级别的锁粒度，MyISAM 不支持，只支持表级别的锁粒度。</span></span></li><li id="https://www.notion.so/1489239e23aa49cab2c012742b06f711" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">MyISAM 不提供事务支持。InnoDB 提供事务支持，实现了 SQL 标准定义了四个隔离级别。</span></span></li><li id="https://www.notion.so/20d06b336d744719babc7baf8a4d457c" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">MyISAM 不支持外键，而 InnoDB 支持。</span></span></li><li id="https://www.notion.so/8d6d12bbc5a44809b97b82e89dbcb54d" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">MyISAM 不支持 MVVC，而 InnoDB 支持。</span></span></li><li id="https://www.notion.so/8a932066acca4683b95d48bbb642af39" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">虽然 MyISAM 引擎和 InnoDB 引擎都是使用 B+Tree 作为索引结构，但是两者的实现方式不太一样。</span></span></li><li id="https://www.notion.so/0180705e71434a6cb27a9c4e2939ea66" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">MyISAM 不支持数据库异常崩溃后的安全恢复，而 InnoDB 支持。</span></span></li><li id="https://www.notion.so/fbcbf2cb06c7445cae478b091b16a3a7" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">InnoDB 的性能比 MyISAM 更强大。</span></span></li></ul><div id="https://www.notion.so/83e819a5b6164ae7a31295d0e4745a19" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div></article>
+    <script src="https://utteranc.es/client.js"
+        repo="youthtoday/youthtoday.github.io"
+        issue-term="pathname"
+        label="✨"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  <footer class="Footer">
+  <div>&copy; Nick的博客 2022</div>
+  <div>&centerdot;</div>
+  <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
+      rel="noopener noreferrer">Notablog</a>.
+  </div>
+</footer>
+</body>
+
+</html>
