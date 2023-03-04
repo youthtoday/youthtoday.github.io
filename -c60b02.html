@@ -24,9 +24,9 @@
     font-size: 20px;
   }
 </style>
-  <title>MySQL锁&nbsp;|&nbsp;Nick的博客</title>
+  <title>比特币挖矿&nbsp;|&nbsp;Nick的博客</title>
   <meta property="og:type" content="blog">
-  <meta property="og:title" content="MySQL锁">
+  <meta property="og:title" content="比特币挖矿">
   
   
   <style>
@@ -153,23 +153,19 @@
     <div class="Header__Spacer Header__Spacer--NoCover">
     </div>
     
-    <h1 class="Header__Title">MySQL锁</h1>
+    <h1 class="Header__Title">比特币挖矿</h1>
     
       <div class="DateTagBar">
         
         
-          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--red">
-            <a href="tag/MySQL.html">MySQL</a>
-          </span>
-        
-          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--brown">
-            <a href="tag/数据库.html">数据库</a>
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--default">
+            <a href="tag/区块链.html">区块链</a>
           </span>
         
       </div>
     
   </header>
-  <article id="https://www.notion.so/33ea3404baea45c38c85bad788292ea8" class="PageRoot"><div id="https://www.notion.so/d926e7a8e3554e97a093165cb7268864" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div></article>
+  <article id="https://www.notion.so/c60b025132a74380b9234b0620118d6c" class="PageRoot"><div id="https://www.notion.so/4be2c15825d74b65a84800408cdd246b" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">比特币网络中大部分节点都是轻节点，如果只是转账而不是挖矿的话，没必要用全节点。</span></span></p></div><div id="https://www.notion.so/b21d825ee41a4b4283d35e3d162cd357" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">挖矿过程中，如果你听到别人发布了一个区块，该区块是合法的，也是在延长最长合法链。这时候你该怎么办？应该停止挖矿，然后重新在本地组装一个候选区块，再重新从头开始挖矿。因为如果沿着新发布的交易往下挖的话，那么本地组装的区块中包含的交易就会发生变化，有些交易可能已经被包含到新发布的区块里了。另外block header的内容也会发生变化，像block header里有交易所组成的merkle tree的根哈希值，还有指向前一个区块的指针，这些也都会发生变化。</span></span></p></div><div id="https://www.notion.so/0a718be85d444e1c8f6b2f5515e83b95" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">这样做是不是有些可惜？挖矿的一个性质是无记忆性，无论是继续挖原来的区块，还是停下来挖一个新组装出来的区块，成功的概率是一样的。只要还没有挖到符合要求的nonce值，前面已经挖了多长时间都是无所谓的。</span></span></p></div><div id="https://www.notion.so/9f1990b3fbc6467e9507cb17b5e1bfe4" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">即使挖到了合法的区块，发布到区块链上，也不能保证胜利了。有可能你发布的区块最终没有成为最长合法链，可能存在一些冲突情况，别人可能同时发布一些合法的区块，或者存在一些你不知道的double spending，使得你的区块中的某些交易变成冲突的。</span></span></p></div><div id="https://www.notion.so/a3b34e50b4794b23b1a5fa49841f20e0" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div></article>
     <script src="https://utteranc.es/client.js"
         repo="youthtoday/youthtoday.github.io"
         issue-term="pathname"

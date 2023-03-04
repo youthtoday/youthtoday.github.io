@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;">
+
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>比特币的共识协议&nbsp;|&nbsp;Nick的博客</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="比特币的共识协议">
+  
+  
+  <style>
+    .DateTagBar {
+      margin-top: 1.0rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="Navbar">
+  <a href="index.html">
+    <div class="Navbar__Btn">
+      
+        <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+      
+      <span>Home</span>
+    </div>
+  </a>
+  
+    
+  
+    
+  
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="-fe1f32.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📚&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>分类</span>
+        </div>
+      </a>
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="about.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;😀&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>关于我</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+</nav>
+  <header class="Header">
+    
+    <div class="Header__Spacer Header__Spacer--NoCover">
+    </div>
+    
+    <h1 class="Header__Title">比特币的共识协议</h1>
+    
+      <div class="DateTagBar">
+        
+        
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--default">
+            <a href="tag/区块链.html">区块链</a>
+          </span>
+        
+      </div>
+    
+  </header>
+  <article id="https://www.notion.so/bd2a645ffb344fb58cf6c306c4598561" class="PageRoot"><div id="https://www.notion.so/9906fb25a9a44006aae3040eb95d72d7" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">数字货币和纸质货币区别是可以复制，叫作双花攻击  即double spending attack。</span></span></p></div><div id="https://www.notion.so/e0edf900f68c4276a2d50ee9c9a275bc" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">去中心化货币要解决两个问题：</span></span></p></div><ol class="NumberedListWrapper"><li id="https://www.notion.so/86a6b90ee6e34669bc66a167f1ce3310" class="NumberedList" value="1"><span class="SemanticStringArray"><span class="SemanticString">数字货币的发行</span></span></li><li id="https://www.notion.so/0686e5df92a54249850bf7e76f852758" class="NumberedList" value="2"><span class="SemanticStringArray"><span class="SemanticString">怎么验证交易的有效性，防止double spending attack。</span></span></li></ol><div id="https://www.notion.so/f2d1b8e74fa64f3eb5aa55a25af896da" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">数字货币的发行和挖矿有关，我们以后介绍，首先来看第二个问题，如何防止双花攻击。</span></span></p></div><div id="https://www.notion.so/df0e871d59bd49c6b92da894a1b0f7bc" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">如图，比特币的发行者A拥有铸币权（create coin）假如发行10个比特币，A(10)分别给B和C各五个  → B(5)C(5)，该交易需要有A的签名，证明经A同意(signed by A)。同时还要说明花掉的10个比特币从哪来的。</span></span></p></div><div id="https://www.notion.so/eb261d4758744aaea72fb4f8dcb1ea9f" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F1cc9b22d-5423-49e3-b4c2-cff520cc0a2e%2FUntitled.png?width=1504&amp;table=block&amp;id=eb261d47-5874-4aae-a72f-b4f8dcb1ea9f"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F1cc9b22d-5423-49e3-b4c2-cff520cc0a2e%2FUntitled.png?width=1504&amp;table=block&amp;id=eb261d47-5874-4aae-a72f-b4f8dcb1ea9f" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/14e7f17a345c4e3bba968c02428aadcd" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">比特币系统中每个交易都包含输入和输出两部分。</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">输入部分要说明币的来源和自己的公钥，输出部分要给出收款人公钥的哈希</strong></span><span class="SemanticString">。有的交易部分比较复杂，如C的货币来源是第二第三个方框，要标识清楚。</span></span></p></div><div id="https://www.notion.so/771a06349733419487aefd1a8d5bcce8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">这就构成了一个小型的区块链，这里有两种哈希指针，一种哈希指针是连接在各个区块之间的，把它们串起来构成一个链表，前面学的就是这种哈希指针。而在该图中还有第二种哈希指针，是指向前面某个交易的指针，用来指明币的来源。为什么要说明币的来源：证明币不是凭空捏造的是有记录的，同时也是防范double spending。</span></span></p></div><div id="https://www.notion.so/9cef0c4b44234440bd157ccf64d484fd" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">现在来看第二个方框里A向B的转账，该交易需要A的签名和B的地址。比特币系统里收款的地址是通过公钥推算出来的。比如B的地址就是B的公钥取哈希然后经过一些转换得到的。</span></span></p></div><div id="https://www.notion.so/ddc929e0e0774312b81e9f3e85a009bc" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">A如何知道B的地址?比特币系统中没有查询对方地址的功能，必须通过其他渠道。比如某个电商网站，接受比特币支付，就可以公开它的地址或公钥。</span></span></p></div><div id="https://www.notion.so/66c492e81e9c4875a37f05fe8186b7ee" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">A需要知道B的地址，B需要知道A的什么信息吗？B其实也要知道A的公钥，这代表A的身份。不仅是B，所有节点都需要知道A的公钥。而签名是用私钥签名公钥验证，所以区块链上每个节点都要独立验证。</span></span></p></div><div id="https://www.notion.so/2f5fda39357349d6a6a8e4e3ec30955a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">那如何才能知道A的公钥？实际上交易里就包含了。</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">输入时不仅要输入币的来源，还要输入公钥</strong></span><span class="SemanticString">。那就存在了安全漏洞，假如B的同伙B’伪造了这次交易呢？B‘伪造了一次A到B的交易，在交易中将B’的公钥伪造成A的公钥，然后用B’的私钥对交易签名。别的节点收到了交易之后，用B’的公钥来验证签名，以为就是合法的，这就相当于B’把A的钱偷走了。这个问题实际不存在，因为第一个方框里铸币交易的输出就有A的公钥的哈希，所以第二个方框交易里A的公钥要跟前一个交易输出的收款人公钥哈希对的上。要是对不上，就说明币的来源是不对的。</span></span></p></div><h1 id="https://www.notion.so/769e93c3c9744ab497d7114ce1bd41b0" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/769e93c3c9744ab497d7114ce1bd41b0"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">UTXO模型</span></span></h1><div id="https://www.notion.so/a9ebc938f9d64f21b812d1381a7492a5" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">以上原理在比特币中的具体实现就是UTXO模型。大家都知道什么是余额的概念。例如，用微信支付买一瓶水，实际操作是在我的微信余额里面减掉2块钱、在卖家的微信余额里面加上2块钱。现金支付是我拿了10块钱去买水，把10块钱给到卖家，卖家给了我一瓶水、又找了我8块钱的交易模型。UTXO就很像是现金交易，拿10块钱，给了店家2块，又给了矿工5毛，剩下那7块5就给了自己。不同点在于，我拿的这10块钱全部发生了变化，而不是仅仅把2块钱给了商家、5毛钱给矿工，而是我把这10块钱全部花掉，那7块5又找给了自己。这样的交易就构成了一种链式交易，所有合法的交易都可以追溯到前一个或者是前多个交易的输出。</span></span></p></div><div id="https://www.notion.so/e25d3dbd8f644a278610887712fe4d6c" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2deca80b-659d-4c6a-b053-64ef7318524e%2FUntitled.png?width=1242&amp;table=block&amp;id=e25d3dbd-8f64-4a27-8610-887712fe4d6c"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2deca80b-659d-4c6a-b053-64ef7318524e%2FUntitled.png?width=1242&amp;table=block&amp;id=e25d3dbd-8f64-4a27-8610-887712fe4d6c" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/2a5148479ef149ff90ecd1810403731a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">UTXO集合当中的每个元素要给出产生输出的交易的哈希值，以及它在这个交易里是第几个输出。这两个信息就可以定位到UTXO中的输出。</span></span></p></div><div id="https://www.notion.so/c06e0fa348fd46e185585ace8ede599d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">要UTXO集合有什么作用？</span></span></p></div><div id="https://www.notion.so/3e2e030e61a44421b9ef64c2f52c4696" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">为了检测double spending。即检测新发布的交易是否合法。因此全节点要在内存中维护UTXO这样一个数据结构，以便快速检测double spending。</span></span></p></div><div id="https://www.notion.so/7eac22383eff4e01b278fb854569f158" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">实现细节</strong></span></span></p></div><div id="https://www.notion.so/126a002faa5c4351a9295b7e1ee50cda" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">在比特币系统当中，前面这些验证过程，是通过执行脚本来实现的。每个交易的输入提一段脚本，包括给出公钥的过程，公钥也是在输入的脚本里指定的。每个交易的输出也是一段脚本，验证其的合法性，就需要把当前交易的输入脚本跟前面交易(提供币来源的交易)的输出脚本拼在一起，然后看看能不能顺利执行，如果能执行说明是合法的。比特币脚本(BitCoin Script)。</span></span></p></div><div id="https://www.notion.so/8ac00488bd934bf08e69665a8a43a402" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">该图对交易系统进行了简化，实际上每个区块(对应图中的每个方框)可以有很多交易，这些交易就组成merkle tree。每个区块分为块头和块身。</span></span></p></div><div id="https://www.notion.so/50694a96c3054f45878dd982f22ec9b6" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">块头包含的是区块的宏观信息，比如:用的是比特币哪个版本(version)的协议，区块链当中指向前一个区块的指针(hash of previous block header)，整颗merkle tree 的根哈希值(merkle root hash)，还有两个域是跟挖矿相关的，一个是挖矿的难度目标预值(target)，另一个是随机数nonce。这里的target，就是前面讲到的，整个块头的哈希要小于这个预值，即H(block header)≤target。block header里存的就是这个目标预值的编码(nBits)。</span></span></p></div><div id="https://www.notion.so/2c439c69b49b45dba4822481c4913684" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc932944a-0306-444b-af06-bea8380525d0%2FUntitled.png?width=1292&amp;table=block&amp;id=2c439c69-b49b-45db-a482-2481c4913684"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fc932944a-0306-444b-af06-bea8380525d0%2FUntitled.png?width=1292&amp;table=block&amp;id=2c439c69-b49b-45db-a482-2481c4913684" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/b2a7dcb1fc7f4ff6bae41340797af6b8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">这里需要注意，前一个区块的哈希只算的是前一个区块的块头header，取哈希时是把块头的所有部分都取哈希。</span></span></p></div><div id="https://www.notion.so/3a58eabec0b447fd9382d2f061a72dac" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">节点类型</strong></span></span></p></div><div id="https://www.notion.so/c57498f5eb4b4624821d3c07fd709351" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">一个比特币节点是一些功能的集合：路由、区块链数据库、挖矿和钱包服务。</span></span></p></div><ul class="BulletedListWrapper"><li id="https://www.notion.so/c1c49505e1c145a0be6470187b128546" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">Network routing: running Bitcoin Peer-to-Peer (P2P) protocol</span></span></li><li id="https://www.notion.so/1c48300f5edd455c9b0c37e4c30660f6" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">Full blockchain: maintaining a complete and up-to-date copy of blockchain</span></span></li><li id="https://www.notion.so/a97d1da660f74ba8a335603c87ae9d73" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">Mining: compete to create new blocks by solving the PoW hash puzzle</span></span></li><li id="https://www.notion.so/dc46b0dd50da4a1caf83ad4da57073e9" class="BulletedList"><span class="SemanticStringArray"><span class="SemanticString">Wallet: provide wallet services</span></span></li></ul><div id="https://www.notion.so/bdf638ba6ad24e9083879581c71affad" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">前面还有一个内容讲的时候简化了：每个节点都需要验证所有的交易，实际上系统中的节点分全节点(full node)和轻节点(light node)。</span></span></p></div><div id="https://www.notion.so/01f45cba5dba466287a113bbd83d2fa8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">全节点是保存区块链所有的信息的，验证每一个交易，所以全节点又叫fully validating node。Maintain a complete copy of the blockchain. Verify any transaction autonomously and authoritatively without external reference. Satisfy certain requirements: 200G hard dirve, 2G RAM etc.</span></span></p></div><div id="https://www.notion.so/da8cb08bd4254dd3bc46bcbb06167c09" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">轻节点只保存block header的信息，一般来说轻节点没法独立验证交易的合法性。Run on constrained resource devices: smartphones or tablets. Connect and transmit transactions to the Bitcoin network through full nodes. Download the block headers instead of the entire blockchain. Verify transaction using simplified payment verification (SPV).</span></span></p></div><div id="https://www.notion.so/460f4646fd2c4071922bd54b28e0eedc" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">比如一个交易是不是double spending，轻节点没有存以前的交易信息所以它没法验证。系统中大多数节点是轻节点，这节课内容主要针对全节点，因为轻节点没有参与区块链的构造和维护，只是利用了区块链的一些信息做一些查询。</span></span></p></div><div id="https://www.notion.so/2625493bda54474684830a01bb006e3d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">区块链里的内容是如何写到区块链里面的呢:每个节点，每个账户都可以发布交易，交易是广播给所有节点的。有些交易是合法的，有些是非法的。谁来决定哪些交易应该被写入下一个区块中呢?按照什么顺序写呢?如果每个节点自己决定可以吗?如果每个人在本地维护一个区块链，那区块链的统一性得不到保证，而账本的内容是要取得分布式的共识(distributed consensus)。</span></span></p></div><h1 id="https://www.notion.so/f3784a82aa284552888360257c30a9ee" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/f3784a82aa284552888360257c30a9ee"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">共识协议</span></span></h1><div id="https://www.notion.so/5b22ad11956b431c9aad7b52646bdc15" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">比特币中共识要解决的一个问题是，有些节点可能是有恶意的。我们假设系统中大多数节点是好的，那么该如何取得共识协议?</span></span></p></div><h2 id="https://www.notion.so/d2065849ebe54b99887cdb9b29c4b66b" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/d2065849ebe54b99887cdb9b29c4b66b"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">One Identity One Vote</span></span></h2><div id="https://www.notion.so/6766f7278a684193a5c3c35a2411b7b3" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">第一种方案是投票，首先应该确定哪些区块有投票权，有些membership是有严格要求的，这种情况下基于投票的方案是可行的。但比特币系统创建账户是很容易的，甚至一个人产生了公私钥对别人都无法得知，只有转账时别人才知道。所以有些人可以不停的创建账户，当超过账户总数的一半时就有了控制权，这种称为女巫攻击(sybil attack)。因此投票方法不可取。</span></span></p></div><h2 id="https://www.notion.so/a669523aada44f35973585e4a87c237e" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/a669523aada44f35973585e4a87c237e"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">Proof of Work</span></span></h2><div id="https://www.notion.so/92d0fe5fe1ac41269ac4bc479f24cb16" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">比特币账户巧妙的解决了这个问题，不是按照账户数目投票，而是按照计算力来投票。每个节点都可以在本地组装出一个候选区块，把它认为合法的交易放在里面，然后开始尝试各种nonce值(占4 byte)，看哪一个能满足不等式H(block header)≤target的要求。如果某个节点找到了符合要求的nonce，它就获得了记账权。</span></span></p></div><div id="https://www.notion.so/5239ab138ec0429a9c87fdf1fc419afa" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F49414348-7ab0-4e45-8ebb-0943141333bd%2FUntitled.png?width=2222&amp;table=block&amp;id=5239ab13-8ec0-429a-9c87-fdf1fc419afa"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F49414348-7ab0-4e45-8ebb-0943141333bd%2FUntitled.png?width=2222&amp;table=block&amp;id=5239ab13-8ec0-429a-9c87-fdf1fc419afa" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/5944e6238eab47b99b40e451004b1211" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">所谓的记账权，就是往比特币账本里写入下一个区块的权利。只有找到这个nonce，获得记账权的节点才有权利发布下一个区块。其他节点收到这个区块之后，要验证这个区块的合法性。</span></span></p></div><div id="https://www.notion.so/888b0cdebf104402a5886cfb7a7fc78f" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">比如括号里block header的内容填的对不对；block header里面有一个域，叫nBits域，实际上它是目标预值的一个编码检查一下nBits域设置的是不是符合比特币协议中规定的难度要求；该不等式是否成立。假设都符合要求，然后检查block body 里面的交易列表，验证一下每个交易都是合法的:①要有合法的签名②以前没有被花过。如果有一项不符合要求，这个区块就是不能被接受的。如果所有条件都符合，也不一定接受。</span></span></p></div><h2 id="https://www.notion.so/727a73e56da74418acb3a57bbd5b9f47" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/727a73e56da74418acb3a57bbd5b9f47"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">Longest Chain Rule</span></span></h2><div id="https://www.notion.so/b20655c4594d4659ba9854af18c164fd" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">假如生成了一个新区块，怎么知道新区块插在了哪里呢?根据生成区块的指针。有可能就存在一个问题，如图这两个交易指B转账给C，以及B转账给自己。这种情况不是double spending，判断一个交易是不是double spending ，是看这个区块所在的分支上币又没有被花掉。如图，一直到第三个区块，币都没有花过，所以这个交易是合法的。虽然该交易是合法的，但是它不在最长合法链(longest valid chain)上。这种称为分叉攻击(forking attack)。所以接收的区块应该是扩展最长合法链。</span></span></p></div><div id="https://www.notion.so/9c541b22e72b4768818c0a671adee82d" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff57f4be7-4b71-4d14-a540-e6b449181e8e%2FUntitled.png?width=1182&amp;table=block&amp;id=9c541b22-e72b-4768-818c-0a671adee82d"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Ff57f4be7-4b71-4d14-a540-e6b449181e8e%2FUntitled.png?width=1182&amp;table=block&amp;id=9c541b22-e72b-4768-818c-0a671adee82d" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/3111d5b4daa14b2f954a430479946dab" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">区块链在正常情况下也可能出现分叉:两个节点同时获得记账权。每个节点在本地自己组装一个它认为合适的区块，然后去试各种nonce，如果两个节点在差不多同一个时间找到了符合要求的nonce，就都可以把区块发布，这时会出现两个等长的分叉。这两条都是最长合法链，那该接受那条呢?比特币协议当中，在缺省(默认的意思)情况下，每个节点是接受它最早收到的那个。所以不同节点根据在网络上的位置不同，有的节点先听到新生成的其中一个区块，那就接受这个区块；有些节点先听到另一个区块，那就接受另一个区块。</span></span></p></div><div id="https://www.notion.so/b34b981e668442c890e15616637c33c5" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">如何判断接收了一个区块?比特币协议中用到了implicit consign，如果沿着这个区块往下继续扩展，就算认可了这个发布的区块。比如在新生成的其中一个区块后面又拓展一个区块，表明就认可了这个新区块。</span></span></p></div><div id="https://www.notion.so/2f69902578444a1d920774f1f1a020af" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">等长的临时性的分叉会维持一段时间，直到一个分叉胜出。也就是哪一个链抢先一步生成了新的区块，哪一条就是最长合法链。另一个作废的就叫orphan block。这两个新区块有可能会各自拉拢，两个区块链看谁的算力强，有时候也是看谁的运气好，就会胜出。</span></span></p></div><div id="https://www.notion.so/a80c22edad2e4d66be9c655813f4c73c" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fb7ac458b-3dce-4b00-83dd-d78a9fbe0f9f%2FUntitled.png?width=1100&amp;table=block&amp;id=a80c22ed-ad2e-4d66-be9c-655813f4c73c"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fb7ac458b-3dce-4b00-83dd-d78a9fbe0f9f%2FUntitled.png?width=1100&amp;table=block&amp;id=a80c22ed-ad2e-4d66-be9c-655813f4c73c" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h2 id="https://www.notion.so/65a3a549b84e4c9c9f36c91464c83e68" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/65a3a549b84e4c9c9f36c91464c83e68"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">Block Confirmation</span></span></h2><div id="https://www.notion.so/6e44561305f84d5db4ae682450398fc1" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">胜出的分叉上的区块不能马上用来记账，需要经过n block confirmation才能确认交易。每当一个新的区块被挖出来并添加到区块链上，就相当于对之前所有交易的一次确认。因此，如果交易有6个确认，就意味着有6个区块在你的交易所在的区块之后被添加到了区块链上。这样做的目的是为了保证交易的安全性和不可逆性，防止双重支付或者篡改。一般来说，比特币网络要求至少6个确认才能认为交易是有效的。</span></span></p></div><div id="https://www.notion.so/4aee2a8ba2614030b7fb515e27bce5d4" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">竞争记账权的好处：首先获得记账权的节点本身有一定的权力，可以决定哪些交易写到下一个区块里。但这些不应该被设定为竞争记账权的动力，所以巧妙地建立了一个机制:区块奖励(block reward)。</span></span></p></div><div id="https://www.notion.so/cb820ba9c478486cb1f493325440d416" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">比特币协议中规定获得记账权的节点在发布的区块里可以有一个特殊的交易:铸币交易。在这个交易里可以发布一定数量的比特币。</span></span></p></div><div id="https://www.notion.so/ad44a4f4a4e64cf3a15856cb8650072a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">这里要回到前面的问题①，谁来决定货币的发行?coinbase transaction币基交易是比特币系统中发行新的比特币的唯一方法，后面的交易都是比特币的转移。这个交易不用指出币的来源。</span></span></p></div><div id="https://www.notion.so/440ec1f82c214ae7b4d939897720f99b" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">那么能造多少币呢?开始时比特币刚上线的时候，每一个发布的区块可以产生50BTC(BTC就是比特币的符号)。协议中规定，21万个区块以后，初块奖励就要减半，就变成了25BTC。再过21万个区块，又要减半。</span></span></p></div><div id="https://www.notion.so/6306d2e6d82d41f0beaf67a68462e840" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">因此当一个区块胜出后，另一个作废的区块得到的比特币是没有作用的，其他诚实的区块是不会承认的。</span></span></p></div><h1 id="https://www.notion.so/619168a4f7e74291b4724d215b4faa84" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/619168a4f7e74291b4724d215b4faa84"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">Consensus Rule Change</span></span></h1><div id="https://www.notion.so/8be34d4844be4e5b9d8674eeb5bd8f0b" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">区块链网络升级的方式有两种，hard fork和soft fork。主要区别在与有着不同的兼容性。</span></span></p></div><h2 id="https://www.notion.so/eaeaa4c1dec340a1a2f8be5eabe3fcfd" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/eaeaa4c1dec340a1a2f8be5eabe3fcfd"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">Hard Fork</span></span></h2><div id="https://www.notion.so/76e9e5ad01ff43e5b8f2c9f2abd3e80a" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">hard fork是一种不向后兼容的升级，意味着旧版本的节点无法识别新版本的区块，区块链只能在新版本节点的区块上延续。Reason：correcting important security risks found in older versions
+of the software, to add new functionality, or to reverse transactions, etc. Examples: Bitcoin Cash, Bitcoin gold, etc.</span></span></p></div><div id="https://www.notion.so/3e4900437861474d80663e89660832bf" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F09886ea1-f351-429e-9f3b-2d2d9f782b83%2FUntitled.png?width=1158&amp;table=block&amp;id=3e490043-7861-474d-8066-3e89660832bf"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F09886ea1-f351-429e-9f3b-2d2d9f782b83%2FUntitled.png?width=1158&amp;table=block&amp;id=3e490043-7861-474d-8066-3e89660832bf" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h2 id="https://www.notion.so/04655e0a464040f4b82420db89e09fc7" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--2"><a class="Anchor" href="#https://www.notion.so/04655e0a464040f4b82420db89e09fc7"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">Soft Fork</span></span></h2><div id="https://www.notion.so/8cd50cb4be2945c38a956d63bd0d9c8c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">soft fork是一种向前兼容的升级，意味着旧版本的节点仍然可以接受新版本的区块，但不能使用新功能。因此，soft fork只需要一部分节点升级，而hard fork需要所有节点升级。</span></span></p></div><div id="https://www.notion.so/c5ee775d5eda4f90a06430777c2ae30f" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">Example: consider a new rule lowering block size from 3MB to 2MB. Older nodes will still be able to process transactions and push new blocks that are 2MB or less. But if an older node tries to push a block that is greater than 2MB to the network, newer nodes will reject the block because it violates the new rules.</span></span></p></div><div id="https://www.notion.so/676cd4f557b84ee69a17141d6308d62b" class="Image Image--PageWidth"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2790a4fa-f353-43e5-8298-848699f2b9c2%2FUntitled.png?width=1158&amp;table=block&amp;id=676cd4f5-57b8-4ee6-9a17-141d6308d62b"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2F2790a4fa-f353-43e5-8298-848699f2b9c2%2FUntitled.png?width=1158&amp;table=block&amp;id=676cd4f5-57b8-4ee6-9a17-141d6308d62b" style="width:100%"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><h1 id="https://www.notion.so/016de0c131594f2693b949b15daefe75" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/016de0c131594f2693b949b15daefe75"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">小结</span></span></h1><div id="https://www.notion.so/0151658b869c42d0b3429cb27c668b72" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">比特币系统中要取得什么共识？</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">去中心化的账本</strong></span><span class="SemanticString">要取得共识。谁又能决定账本的内容呢？只有获得记账权的节点才能写东西。怎么获得记账权呢？就是解PoW(挖矿)。按照算力记票，算力可以用每秒能试多少nonce数值表示。那怎样防范女巫攻击呢？按算力记票，即使创建再多的账户，也无法使算力增强。</span></span></p></div><div id="https://www.notion.so/6c864915850440fcb108c7fadf42b1fe" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">比特币争夺记账权的过程叫作挖矿(mining)，比特币被称为数字黄金(digital gold)，争夺记账权的节点被称为矿工(miner)。</span></span></p></div><div id="https://www.notion.so/6ee6525236a54d4399ae7db3d6cc670c" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div></article>
+    <script src="https://utteranc.es/client.js"
+        repo="youthtoday/youthtoday.github.io"
+        issue-term="pathname"
+        label="✨"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  <footer class="Footer">
+  <div>&copy; Nick的博客 2022</div>
+  <div>&centerdot;</div>
+  <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
+      rel="noopener noreferrer">Notablog</a>.
+  </div>
+</footer>
+</body>
+
+</html>
