@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- iOS Safari -->
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<!-- Chrome, Firefox OS and Opera Status Bar Color -->
+<meta name="theme-color" content="#FFFFFF">
+<link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.11.1/katex.min.css">
+<link rel="stylesheet" type="text/css"
+  href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.19.0/themes/prism.min.css">
+<link rel="stylesheet" type="text/css" href="css/SourceSansPro.css">
+<link rel="stylesheet" type="text/css" href="css/theme.css">
+<link rel="stylesheet" type="text/css" href="css/notablog.css">
+<!-- Favicon -->
+
+  <link rel="shortcut icon" href="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;">
+
+<style>
+  :root {
+    font-size: 20px;
+  }
+</style>
+  <title>超卖问题解决思路&nbsp;|&nbsp;Nick的博客</title>
+  <meta property="og:type" content="blog">
+  <meta property="og:title" content="超卖问题解决思路">
+  
+  
+  <style>
+    .DateTagBar {
+      margin-top: 1.0rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav class="Navbar">
+  <a href="index.html">
+    <div class="Navbar__Btn">
+      
+        <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📖&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+      
+      <span>Home</span>
+    </div>
+  </a>
+  
+    
+  
+    
+  
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="-fe1f32.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;📚&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>分类</span>
+        </div>
+      </a>
+    
+  
+    
+      <span class="Navbar__Delim">&centerdot;</span>
+      <a href="about.html">
+        <div class="Navbar__Btn">
+          
+            <span><img class="inline-img-icon" src="data:image/svg+xml,&lt;svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22&gt;&lt;text text-anchor=%22middle%22 dominant-baseline=%22middle%22 x=%2250%22 y=%2255%22 font-size=%2280%22&gt;😀&lt;/text&gt;&lt;/svg&gt;"></span>&nbsp;
+          
+          <span>关于我</span>
+        </div>
+      </a>
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+    
+  
+</nav>
+  <header class="Header">
+    
+    <div class="Header__Spacer Header__Spacer--NoCover">
+    </div>
+    
+    <h1 class="Header__Title">超卖问题解决思路</h1>
+    
+      <div class="DateTagBar">
+        
+        
+          <span class="DateTagBar__Item DateTagBar__Tag DateTagBar__Tag--green">
+            <a href="tag/项目设计.html">项目设计</a>
+          </span>
+        
+      </div>
+    
+  </header>
+  <article id="https://www.notion.so/71bf810ea4584a21bb6514eb3b77c86c" class="PageRoot"><div id="https://www.notion.so/3cde1884880447ab94ad359f7c72e410" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"></span></p></div><h1 id="https://www.notion.so/678d6fbf39ef4bbf88443a893e7346fe" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/678d6fbf39ef4bbf88443a893e7346fe"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">无并发情况</span></span></h1><div id="https://www.notion.so/03eefcf8680e49f68ba70f6ee4297e6b" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">首先我们考虑最简单的没有并发的情况。下单时，需要考虑如下步骤：查询数据库、判断库存是否满足（大于等于）订单商品需求。如果满足就进行更新操作、下单成功。如果不满足就返回失败。</span></span></p></div><div id="https://www.notion.so/58a3742a8f064a0d85300b884abc1a76" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">下面，我们考虑有并发时如何解决超卖问题。</span></span></p></div><h1 id="https://www.notion.so/18e6eeff42f545ca8dd2a9056e7e7fc7" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/18e6eeff42f545ca8dd2a9056e7e7fc7"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">并发导致超卖</span></span></h1><div id="https://www.notion.so/468ec375d3574d7baf439dfd2a5b1cb8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">超卖问题涉及到多线程高并发的场景，比如某件商品库存为10个，这个时候有两笔订单要下单。一个是下单8件，一个是下单7件。当他们同时读数据库库存进行判断时，都会认为可以下单成功。然而这就会产生卖出15件的问题。</span></span></p></div><div id="https://www.notion.so/31a213b426454753bc3c11a4688fc988" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">解决的三种方案：</span></span></p></div><ol class="NumberedListWrapper"><li id="https://www.notion.so/c802cad378a0476389e86c1d5f1b082e" class="NumberedList" value="1"><span class="SemanticStringArray"></span></li></ol><h1 id="https://www.notion.so/52b7f1812fde49909bbd845b5cdcfa24" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/52b7f1812fde49909bbd845b5cdcfa24"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">应用层加互斥锁（不适用分布式环境）</span></span></h1><div id="https://www.notion.so/f4ed7689944a413c93809e70bbe17485" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">可以在应用层该下单方法上加互斥锁，比如通过synchronized关键字加互斥锁，使得该方法的调用变为串行调用执行，多个请求到达时能够串行执行，整createOrde中的查询库存和减库存成为一个“原子操作”，防止超卖。但是在高并发场景下，这使得大量请求到达时，不是并发执行，而是串行执行，排队等待互斥锁的请求很多，后面的</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">请求响应时间很长，性能很差</strong></span><span class="SemanticString">。</span></span></p></div><div id="https://www.notion.so/c2a8b3ccc41e40c4b36c084e0198f92d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">注意在</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">分布式应用环境</strong></span><span class="SemanticString">下，比如应用部署在两个机器上，那么此方式是无效得，因为多机之间没有约束。</span></span></p></div><h1 id="https://www.notion.so/b5265c8756d34f0ea584fc1bd0d51a25" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/b5265c8756d34f0ea584fc1bd0d51a25"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">MySQL数据库层加互斥锁（MySQL有压力）</span></span></h1><div id="https://www.notion.so/bf8626f5102340d9b740a2d1ebb9c38d" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">将查询和更新的sql语句合并为一条sql</span></span></p></div><div id="https://www.notion.so/59b26e1a0b8643449e2ca3fd602a69ef" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">例如：将</span></span></p></div><pre id="https://www.notion.so/5b267e1c9b164b91b2d9e540ffe3412a" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span><span class="token keyword">select</span> amount <span class="token keyword">from</span> product <span class="token keyword">where</span> productID <span class="token operator">=</span> <span class="token number">12345</span>
+<span class="token comment">// 判断amount - quantity是否大于等于0，如果是，则继续</span>
+<span class="token keyword">update</span> product <span class="token keyword">set</span> amount <span class="token operator">=</span> amount <span class="token operator">-</span> quantity <span class="token keyword">where</span> productID <span class="token operator">=</span> <span class="token number">12345</span></span></span></span></code></pre><div id="https://www.notion.so/cc4afa64b1d4402495712c058b042cca" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">注意：如果将这两条sql语句写进一个事务里会导致超卖。例如多个查询sql请求到达数据库，此时如果是InnoDB存储引擎，多版本控制机制下多个事务的查询sql（快照读），在此时均可以读取到一样的库存数量，然后多个事务的更新操作会被MySQL通过互斥锁变成串行执行操作，且均可以执行减库存的更新操作，从而使得超卖问题出现。</span></span></p></div><div id="https://www.notion.so/d6844c9f869f479593421c0096e0e822" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">合并为：</span></span></p></div><pre id="https://www.notion.so/29023305944c4439b5d277c7d0b286a7" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span><span class="token keyword">update</span> product <span class="token keyword">set</span> amount <span class="token operator">=</span> amount <span class="token operator">-</span> quantity 
+<span class="token keyword">where</span> productID <span class="token operator">=</span> <span class="token number">12345</span> <span class="token operator">and</span> amount <span class="token operator">>=</span> quantity</span></span></span></code></pre><div id="https://www.notion.so/c7f5e4fd5b74417b8918785c7cef1637" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">如上，一条语句执行查询和减库存操作，使得多个请求到达数据库时，数据库直接将多个更新语句通过互斥锁串行化执行，保证不会出现超卖。但是将互斥操作下沉到数据库可行吗？应该是不可行的，大量的写请求到达数据库，然后串行执行，这样操作的</span><span class="SemanticString"><strong class="SemanticString__Fragment SemanticString__Fragment--Bold">性能差，对数据库的压力也大</strong></span><span class="SemanticString">。在并发数量比较少的情况下，还可以接受，但是如果是高并发的场景，上述方法不可取。</span></span></p></div><h1 id="https://www.notion.so/e734902632df46358c9ea5b4807b1985" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/e734902632df46358c9ea5b4807b1985"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">通过Redis事务解决（Redis有压力）</span></span></h1><div id="https://www.notion.so/19d100eedb6a4abfa967273d08151bc8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">将库存数量放在redis中，查询库存和减库存均走redis而不操作mysql，从而减轻数据库的压力，但是这个方式和应用层互斥、mysql互斥没有本质区别，仅仅是将互斥操作放在了redis中而已。</span></span></p></div><h1 id="https://www.notion.so/612f896e62a4401183df0094ae88d911" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/612f896e62a4401183df0094ae88d911"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">通过Redis队列解决（只支持限卖一件）</span></span></h1><div id="https://www.notion.so/4d2a359ad3304b1c94ef9afccdb34a19" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">将秒杀的商品id作为键，库存作为redis中的list，提前加入redis缓存中，多少件商品就入队列多少个1，高并发请求到达时依次在队列中排序获取库存，能够获得库存则继续执行下单逻辑，否则库存不足抢不到。但是这种方式下，每个请求只能购买一件商品。</span></span></p></div><pre id="https://www.notion.so/0098db6c23294ae1a54ba643a61843a1" class="Code Code--NoWrap"><code><span class="SemanticStringArray"><span class="SemanticString"><span><span class="token keyword">int</span> result <span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+<span class="token keyword">if</span> <span class="token punctuation">(</span>result <span class="token operator">=</span> jedis<span class="token punctuation">.</span>lpop<span class="token punctuation">(</span><span class="token string">"12345"</span><span class="token punctuation">)</span> <span class="token operator">></span> <span class="token number">0</span><span class="token punctuation">)</span> {
+<span class="token comment">// 有库存</span>
+} <span class="token keyword">else</span> {
+<span class="token comment">// 无库存</span>
+}</span></span></span></code></pre><h1 id="https://www.notion.so/faf1cc43fe1e4e0ead89e3e74550a3f1" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/faf1cc43fe1e4e0ead89e3e74550a3f1"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">通过Redis分布式锁解决（麻烦）</span></span></h1><div id="https://www.notion.so/19caf933391b4d79b9c1d9de283758e5" class="Image Image--Normal"><figure><a href="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa21fbb8b-7bb3-4c89-84bf-272e48b679b6%2FUntitled.png?width=707&amp;table=block&amp;id=19caf933-391b-4d79-b9c1-d9de283758e5"><img src="https://www.notion.so/signed/https%3A%2F%2Fs3-us-west-2.amazonaws.com%2Fsecure.notion-static.com%2Fa21fbb8b-7bb3-4c89-84bf-272e48b679b6%2FUntitled.png?width=707&amp;table=block&amp;id=19caf933-391b-4d79-b9c1-d9de283758e5" style="width:707px"/></a><figcaption><span class="SemanticStringArray"></span></figcaption></figure></div><div id="https://www.notion.so/da57c0941a454628aebd0c390ca2c4f1" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">简单的分布式锁解决超卖问题流程如上。但是这样的问题在于所有用户都对同一个分布式锁进行等待和加锁、释放，同样无法适应高并发的场景。</span></span></p></div><div id="https://www.notion.so/e9ac83bf0bad44ea8705910d90a02b76" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">优化Redis分布式锁：分段加锁。</span></span></p></div><div id="https://www.notion.so/11f0c19c595542ca8464ff9add06b499" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">假如你现在iphone有1000个库存，那么你完全可以给拆成20个库存段。可以在数据库的表里建20个库存字段，比如stock_01，stock_02，…，也可以在redis放20个库存key。总之，就是把你的1000件库存给他拆开，每个库存段是50件库存，比如stock_01对应50件库存，stock_02对应50件库存。</span></span></p></div><div id="https://www.notion.so/db3e7924796d45bc8a5aa1fcbb0407da" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">接着，每个请求可以根据自己写的一个简单的随机算法，随机对应在20个分段库存里，选择一个进行加锁。当然也要考虑到分段库存为零时，对这个请求重新分配一个分段。</span></span></p></div><div id="https://www.notion.so/476db49011784b3396f22bc574f25be8" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">但这样优化的分布式锁也不是最优的解决高并发超卖问题的方法。</span></span></p></div><h1 id="https://www.notion.so/6060938e5f694724905556d58fa94569" class="ColorfulBlock ColorfulBlock--ColorDefault Heading Heading--1"><a class="Anchor" href="#https://www.notion.so/6060938e5f694724905556d58fa94569"><svg width="16" height="16" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a><span class="SemanticStringArray"><span class="SemanticString">通过Redis原子操作和MySQL锁实现（推荐）</span></span></h1><div id="https://www.notion.so/6da83ca8a924403aa18915ea19de11bf" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">我们可以将商品的库存数量缓存到Redis中，在Redis里通过原子操作来判断库存是否满足购买数量要求。如果满足就更新数据库（Redis缓存更新机制会在之后将数据库同步到Redis）。</span></span></p></div><div id="https://www.notion.so/f75ac51b6a344a81b6673bdaa15aece2" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">具体流程是：首先去Redis中查询有没有对应商品的key的键值对，如果查到了就直接返回目前redis中商品的库存。如果redis中没有，就去mysql中查商品库存，并通过setnx命令写入redis（setnx是为了防止其他线程先完成了设置）。然后判断该商品库存是否满足，不满足直接返回。通过decrby key numbers命令减Redis库存，然后得到返回值，对返回值进行判断，如果返回值&lt;0则说明库存不足，此时将减去的库存加上 incrby key numbers，然后返回库存不足；如果返回值&gt;=0则说明库存足够，则执行MySQL减库存操作（update 语句 where amount &gt; quantity），然后执行下单的后续操作。</span></span></p></div><div id="https://www.notion.so/02e2329c08df4a13ba38724e238549ab" class="ColorfulBlock ColorfulBlock--ColorDefault Text"><p class="Text__Content"><span class="SemanticStringArray"><span class="SemanticString">这样就将大量查询操作放在了Redis上，MySQL仍然能支持更改数据的写操作。</span></span></p></div></article>
+    <script src="https://utteranc.es/client.js"
+        repo="youthtoday/youthtoday.github.io"
+        issue-term="pathname"
+        label="✨"
+        theme="github-light"
+        crossorigin="anonymous"
+        async>
+    </script>
+  <footer class="Footer">
+  <div>&copy; Nick的博客 2022</div>
+  <div>&centerdot;</div>
+  <div>Powered by <a href="https://github.com/dragonman225/notablog" target="_blank"
+      rel="noopener noreferrer">Notablog</a>.
+  </div>
+</footer>
+</body>
+
+</html>
